@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html class=no-js>
+<head>
+<meta charset=utf-8>
+<title>Java China - ${title}</title>
+<meta name=description content="">
+<meta name=viewport content="width=device-width">
+<link rel="shortcut icon" href="${base}/assets/favicon.ico"/>
+<link type="text/css" rel="stylesheet" href="${cdn}/assets/font-awesome-4.6.1/css/font-awesome.min.css?ver=${version}" />
+<link type="text/css" rel="stylesheet" href="${cdn}/assets/lib/sweet-alert/sweetalert.min.css?ver=${version}" />
+<link type="text/css" rel=stylesheet href="${base}/assets/styles/admin.css" />
+<script type="text/javascript" src="${cdn}/assets/scripts/jquery-2.2.0.min.js?ver=${version}"></script>
+<body>
+<div class="app layout-fixed-header">
+	<div class="sidebar-panel offscreen-left">
+		<div class=brand>
+			<div class=brand-logo>
+				<img src="${base}/assets/images/logo1.png" height=15 alt="">
+			</div>
+			<a href=javascript:;
+				class="toggle-sidebar hidden-xs hamburger-icon v3"
+				data-toggle=layout-small-menu> <span></span> <span></span> <span></span>
+				<span></span>
+			</a>
+		</div>
+		<nav role=navigation>
+			<ul class=nav>
+				<li class="#if(active=='home')open#end"><a href="${base_url('/admin')}"> <i class="fa fa-flask"></i> <span>仪表盘</span></a></li>
+				<li class="#if(active=='nodes')open#end"><a href="${base_url('/admin/nodes')}"> <i class="fa fa-leaf"></i> <span>节点管理</span></a></li>
+				<li class="#if(active=='users')open#end"><a href="${base_url('/admin/users')}"> <i class="fa fa-user"></i> <span>用户管理</span></a></li>
+				<li class="#if(active=='settings')open#end"><a href="${base_url('/admin/settings')}"> <i class="fa fa-gears"></i> <span>系统设置</span></a></li>
+				<li class="#if(active=='tools')open#end"><a href="${base_url('/admin/tools')}"> <i class="fa fa-paw"></i> <span>系统工具</span></a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class=main-panel>
+		<header class="header navbar">
+			<div class="brand visible-xs">
+				<div class=toggle-offscreen>
+					<a href=# class="hamburger-icon visible-xs" data-toggle=offscreen
+						data-move=ltr> <span></span> <span></span> <span></span>
+					</a>
+				</div>
+				<div class=brand-logo>
+					<img src="${base}/assets/images/logo.png" height=15 alt="">
+				</div>
+			</div>
+			<ul class="nav navbar-nav hidden-xs">
+				<p>
+					<ol class="breadcrumb">
+						<li><a href="/admin">仪表盘</a></li>
+						<li class="active ng-binding">${title}</li>
+					</ol>
+				</p>
+			</ul>
+			<ul class="nav navbar-nav navbar-right hidden-xs">
+				<li>
+					<a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<img src="${login_user.avatar}"
+							class="header-avatar img-circle ml10" alt="${login_user.user_name}" title="${login_user.user_name}">
+							<span class=pull-left>管理员：${login_user.user_name}</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="${base_url('/')}">回到主页</a></li>
+						<li><a href="${base_url('/admin/settings')}">系统设置</a></li>
+						<li><a href="${base_url('/logout')}">注销</a></li>
+					</ul>
+				</li>
+			</ul>
+		</header>
