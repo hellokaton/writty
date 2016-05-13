@@ -1,9 +1,6 @@
 package com.writty.controller;
 
-import java.util.Map;
-
 import com.blade.ioc.annotation.Inject;
-import com.blade.jdbc.Page;
 import com.blade.route.annotation.Path;
 import com.blade.route.annotation.Route;
 import com.blade.view.ModelAndView;
@@ -29,24 +26,6 @@ public class ArticleController extends BaseController {
 	
 	@Inject
 	private FavoriteService favoriteService;
-	
-	/**
-	 * 我的收藏
-	 */
-	@Route(value = "/favorites", method = HttpMethod.GET)
-	public ModelAndView show_favorites(Request request, Response response){
-		User user = SessionKit.getLoginUser();
-		if(null == user){
-			response.go("/");
-			return null;
-		}
-		
-		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> favoritePage = favoriteService.getMyFavorites(user.getUid(), page, count);
-		request.attribute("favoritePage", favoritePage);
-		
-		return this.getView("favorites");
-	}
 	
 	/**
 	 * 写文章页面

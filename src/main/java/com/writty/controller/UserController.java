@@ -2,9 +2,11 @@ package com.writty.controller;
 
 import java.io.File;
 import java.util.Date;
+import java.util.Map;
 
 import com.blade.Blade;
 import com.blade.ioc.annotation.Inject;
+import com.blade.jdbc.Page;
 import com.blade.route.annotation.Path;
 import com.blade.route.annotation.Route;
 import com.blade.view.ModelAndView;
@@ -16,6 +18,7 @@ import com.writty.Constant;
 import com.writty.kit.SessionKit;
 import com.writty.kit.Utils;
 import com.writty.model.User;
+import com.writty.service.FavoriteService;
 import com.writty.service.PostService;
 import com.writty.service.UserService;
 
@@ -34,6 +37,54 @@ public class UserController extends BaseController {
 	
 	@Inject
 	private PostService postService;
+	
+	@Inject
+	private FavoriteService favoriteService;
+	
+	/**
+	 * 我的收藏
+	 */
+	@Route(value = "/favorites", method = HttpMethod.GET)
+	public ModelAndView show_favorites(Request request, Response response){
+		User user = SessionKit.getLoginUser();
+		if(null == user){
+			response.go("/");
+			return null;
+		}
+		
+		Integer page = request.queryAsInt("p");
+		Page<Map<String, Object>> favoritePage = favoriteService.getMyFavorites(user.getUid(), page, count);
+		request.attribute("favoritePage", favoritePage);
+		
+		return this.getView("favorites");
+	}
+	
+	/**
+	 * 收藏文章
+	 */
+	@Route(value = "/favorite", method = HttpMethod.POST)
+	public void favorite(Request request, Response response){
+		User user = SessionKit.getLoginUser();
+		if(null == user){
+			this.nosignin(response);
+			return;
+		}
+		String pid = request.query("pid");
+		String type = request.query("type");
+		
+		boolean flag = false;
+		if(type.equals("favorite")){
+			flag = favoriteService.favorite(user.getUid(), pid);
+		}
+		if(type.equals("unfavorite")){
+			flag = favoriteService.delete(user.getUid(), pid);
+		}
+		if(flag){
+			this.success(response, "");
+		} else {
+			this.error(response, "收藏失败");
+		}
+	}
 	
 	/**
 	 * 个人设置页面
