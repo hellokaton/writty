@@ -6,6 +6,7 @@ import java.util.Map;
 import com.blade.view.ModelAndView;
 import com.blade.web.http.Response;
 
+import blade.kit.json.JSONKit;
 import blade.kit.json.JSONObject;
 
 public class BaseController {
@@ -34,6 +35,16 @@ public class BaseController {
 	
 	public ModelAndView getAdminView(Map<String, Object> map, String view){
 		return new ModelAndView(map, "/admin/" + view + ".html");
+	}
+	
+	public String JSONRes(String key, Object object){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(key, object);
+		return JSONKit.toJSONString(map);
+	}
+	
+	public String JSONRes(Object object){
+		return JSONKit.toJSONString(object);
 	}
 	
 	public void success(Response response, Object data){

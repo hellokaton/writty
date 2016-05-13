@@ -11,6 +11,7 @@ import com.blade.jdbc.AR;
 import com.blade.jdbc.Page;
 import com.blade.jdbc.QueryParam;
 import com.writty.kit.QiniuKit;
+import com.writty.kit.Utils;
 import com.writty.model.Special;
 import com.writty.service.SpecialService;
 
@@ -53,6 +54,13 @@ public class SpecialServiceImpl implements SpecialService {
 		
 		List<Special> specials = pageSpecial.getResults();
 		
+		List<Map<String, Object>> specialsMaps = this.getListMap(specials);
+		
+		result.setResults(specialsMaps);
+		return result;
+	}
+	
+	private List<Map<String, Object>> getListMap(List<Special> specials){
 		List<Map<String, Object>> specialsMaps = new ArrayList<Map<String,Object>>();
 		if(null != specials && specials.size() > 0){
 			for(Special special : specials){
@@ -62,11 +70,9 @@ public class SpecialServiceImpl implements SpecialService {
 				}
 			}
 		}
-		
-		result.setResults(specialsMaps);
-		return result;
+		return specialsMaps;
 	}
-
+	
 	@Override
 	public boolean save(String title, String slug, String cover, String descrption) {
 		try {
@@ -189,6 +195,20 @@ public class SpecialServiceImpl implements SpecialService {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Map<String, Object>> getRandomList(Integer count) {
+		if(null != count){
+			
+			Integer max_sid = AR.find("select max(sid) from t_special").first(Integer.class) + 1;
+			
+			int[] randoms = Utils.randomCommon(1, max_sid, count);
+			
+			List<Special> specials = AR.find("select * from t_special where sid in(?)", AR.in(randoms)).list(Special.class);
+			return this.getListMap(specials);
+		}
+		return null;
 	}
 		
 }

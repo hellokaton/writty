@@ -53,14 +53,16 @@
                                 </tbody>
                             </table>
                             
+                            #if(specialPage.totalPage > 1)
                             <div class="btn-group pull-right m-t-10 m-b-10">
-                            	   <button type="button" class="btn btn-default">上一页</button>
-                                   <button type="button" class="btn btn-default">1</button>
-                                   <button type="button" class="btn btn-default">2</button>
-                                   <button type="button" class="btn btn-default">3</button>
-                                   <button type="button" class="btn btn-inverse">4</button>
-                                   <button type="button" class="btn btn-default disabled">下一页</button>
-                              </div>
+                            	#if(specialPage.page > 1)
+                            	<a href="${base_url('/?p=') + specialPage.prev_page}" class="btn btn-default">上一页</a>
+                            	#end
+								#if(specialPage.totalPage > 1 && specialPage.page != specialPage.totalPage)
+								<a href="${base_url('/?p=') + specialPage.next_page}"  class="btn btn-default">下一页</a>
+								#end
+                             </div>
+							#end
                         </div>
                     </div>
                 </div>

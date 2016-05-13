@@ -1,10 +1,11 @@
 package com.writty.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import com.blade.ioc.annotation.Inject;
-import com.blade.jdbc.Page;
 import com.blade.route.annotation.Path;
+import com.blade.route.annotation.PathVariable;
 import com.blade.route.annotation.Route;
 import com.blade.view.ModelAndView;
 import com.blade.web.http.HttpMethod;
@@ -13,6 +14,7 @@ import com.blade.web.http.Response;
 import com.writty.Constant;
 import com.writty.kit.SessionKit;
 import com.writty.model.User;
+import com.writty.service.PostService;
 import com.writty.service.SpecialService;
 import com.writty.service.UserService;
 
@@ -27,14 +29,17 @@ public class IndexController extends BaseController {
 	@Inject
 	private SpecialService specialService;
 	
+	@Inject
+	private PostService postService;
+	
 	/**
 	 * 首页
 	 */
 	@Route(value = "/", method = HttpMethod.GET)
 	public ModelAndView show_home(Request request, Response response){
 		
-		Page<Map<String, Object>> specialPage = specialService.getPageListMap(null, 1, 8);
-		request.attribute("specialPage", specialPage);
+		List<Map<String, Object>> specials = specialService.getRandomList(8);
+		request.attribute("specials", specials);
 		
 		return this.getView("home");
 	}
@@ -61,6 +66,26 @@ public class IndexController extends BaseController {
 	@Route(value = "/explore", method = HttpMethod.GET)
 	public ModelAndView show_explore(Request request, Response response){
 		return this.getView("explore");
+	}
+	
+	/**
+	 * 查看专栏详情
+	 */
+	@Route(value = "/s/:id", method = HttpMethod.GET)
+	public ModelAndView showSpecialDetail(@PathVariable("id") Long id, Request request, Response response){
+		Map<String, Object> specialMap = specialService.getSpecialMap(null, id);
+		request.attribute("specialMap", specialMap);
+		return this.getView("special_detail");
+	}
+	
+	/**
+	 * 查看文章详情
+	 */
+	@Route(value = "/p/:pid", method = HttpMethod.GET)
+	public ModelAndView showArticle(@PathVariable("pid") String pid, Request request, Response response){
+		Map<String, Object> postMap = postService.getPostDetail(null, pid);
+		request.attribute("postMap", postMap);
+		return this.getView("post_detail");
 	}
 	
 	/**

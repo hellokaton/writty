@@ -1,24 +1,20 @@
 package com.writty.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.blade.jdbc.Page;
-import com.blade.jdbc.QueryParam;
-
 import com.writty.model.Post;
 
 public interface PostService {
 	
-	public Post getPost(String pid);
+	Post getPost(String pid);
 	
-	public Post getPost(QueryParam where);
+	Map<String, Object> getPostDetail(Post post, String pid);
 	
-	public List<Post> getPostList(QueryParam where);
+	Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count);
 	
-	public Page<Post> getPageList(QueryParam where);
+	boolean save(String title, String slug, Long uid, Long sid, Integer is_pub, String cover, String content);
 	
-	public boolean save( String title, String slug, Integer uid, String cover, String content, Integer views, Integer comments, Integer created, Integer isPage, Integer updated );
-	
-	public boolean delete(String pid);
+	boolean delete(String pid);
 		
 }

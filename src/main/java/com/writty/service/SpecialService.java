@@ -19,6 +19,8 @@ public interface SpecialService {
 	
 	Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count);
 	
+	List<Map<String, Object>> getRandomList(Integer count);
+	
 	boolean save(String title, String slug, String cover, String description);
 	
 	boolean delete(Integer id);

@@ -107,8 +107,17 @@ public class SpecialsController extends BaseController {
 			return;
 		}
 		
-		String cover_path = Blade.me().webRoot() + File.separator + cover;
+		if(title.length() > 20){
+			this.error(response, "标题应控制在20个字符以内");
+			return;
+		}
 		
+		if(description.length() > 300){
+			this.error(response, "描述应控制在300个字符以内");
+			return;
+		}
+		
+		String cover_path = Blade.me().webRoot() + File.separator + cover;
 		boolean flag = specialService.save(title, slug, cover_path, description);
 		if(flag){
 			this.success(response, "");
@@ -129,6 +138,11 @@ public class SpecialsController extends BaseController {
 		String description = request.query("description");
 		
 		boolean flag = specialService.update(id, title, slug, cover, description);
+		if(flag){
+			this.success(response, "");
+		} else {
+			this.error(response, "专栏修改失败");
+		}
 	}
 	
 	
