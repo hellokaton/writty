@@ -1,94 +1,35 @@
 #include("./common/header.html", {active:'explore', title:'发现'})
- <link href="${cdn}/assets/css/explore.css" rel="stylesheet" />
+ <link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
-<div class="jumbotron-container wraper container-fluid">
-	<div class="row explore-list">	
+<div class="container wraper container-fluid" style="max-width: 960px;">
+	<div class="col-md-12">
+	<div class="row explore-list">
+		#for(item : postPage.results)
 		<div class="panel panel-default">
              <div class="panel-body"> 
                  <div class="col-md-5">
-                 	<img class="br-radius" src="${cdn}/assets/img/04ca0a44305cd8859071a07cadc61fc8_b.jpg" width="260" height="180"/>
+                 	<img class="br-radius" src="${item.cover}" width="320" height="200"/>
                  </div>
                  <div class="col-md-7 summary-meta">
-                 	<a href=""><h3 class="text-blank">乐高版《小王子》幕后大起底！ | 小课堂 Vol. 2</h3></a>
+                 	<a href="${base_url('/p/') + item.pid}"><h3 class="text-blank">${item.title}</h3></a>
                  	<p class="txt">
                  		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
-                 		<a href="">阅读全文</a>
+                 		<a href="${base_url('/p/') + item.pid}">阅读全文</a>
                  	</p>
-                 	<div class="m-t-20">
-                 		<a href="">王爵</a> <span class="text-">发布于 1天前</span>
+                 	<div class="read-meta">
+                 		<a href="">${item.publish_user}</a> <span class="text-">发布于 ${timespan(item.created)}</span>
                  		<div class="pull-right">
-                 		10个评论
+                 		${item.comments}个评论
                  		</div>
                  	</div>
                  </div>
              </div> 
          </div>
-         
-         <div class="panel panel-default">
-             <div class="panel-body"> 
-                 <div class="col-md-5">
-                 	<img class="br-radius" src="${cdn}/assets/img/04ca0a44305cd8859071a07cadc61fc8_b.jpg" width="260" height="180"/>
-                 </div>
-                 <div class="col-md-7 summary-meta">
-                 	<a href=""><h3 class="text-blank">乐高版《小王子》幕后大起底！ | 小课堂 Vol. 2</h3></a>
-                 	<p class="txt">
-                 		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
-                 		<a href="">阅读全文</a>
-                 	</p>
-                 	<div class="m-t-20">
-                 		<a href="">王爵</a> <span class="text-">发布于 1天前</span>
-                 		<div class="pull-right">
-                 		10个评论
-                 		</div>
-                 	</div>
-                 </div>
-             </div> 
-         </div>
-         
-         <div class="panel panel-default">
-             <div class="panel-body"> 
-                 <div class="col-md-5">
-                 	<img class="br-radius" src="${cdn}/assets/img/04ca0a44305cd8859071a07cadc61fc8_b.jpg" width="260" height="180"/>
-                 </div>
-                 <div class="col-md-7 summary-meta">
-                 	<a href=""><h3 class="text-blank">乐高版《小王子》幕后大起底！ | 小课堂 Vol. 2</h3></a>
-                 	<p class="txt">
-                 		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
-                 		<a href="">阅读全文</a>
-                 	</p>
-                 	<div class="m-t-20">
-                 		<a href="">王爵</a> <span class="text-">发布于 1天前</span>
-                 		<div class="pull-right">
-                 		10个评论
-                 		</div>
-                 	</div>
-                 </div>
-             </div> 
-         </div>
-         
-         
-         <div class="panel panel-default">
-             <div class="panel-body"> 
-                 <div class="col-md-5">
-                 	<img class="br-radius" src="${cdn}/assets/img/04ca0a44305cd8859071a07cadc61fc8_b.jpg" width="260" height="180"/>
-                 </div>
-                 <div class="col-md-7 summary-meta">
-                 	<a href=""><h3 class="text-blank">乐高版《小王子》幕后大起底！ | 小课堂 Vol. 2</h3></a>
-                 	<p class="txt">
-                 		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
-                 		<a href="">阅读全文</a>
-                 	</p>
-                 	<div class="m-t-20">
-                 		<a href="">王爵</a> <span class="text-">发布于 1天前</span>
-                 		<div class="pull-right">
-                 		10个评论
-                 		</div>
-                 	</div>
-                 </div>
-             </div> 
-         </div>
+		#end
 	</div>
 	<!-- End row -->
+	</div>
+	<!-- <div class="col-md-2">暂无内容</div> -->
 </div>
 <!-- END Wraper -->
 #include("./common/footer.html")

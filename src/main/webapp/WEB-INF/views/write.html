@@ -3,36 +3,37 @@
 <link href="${cdn}/assets/select2/select2.css" rel="stylesheet" />
 <link href="${cdn}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
-<div class="container wraper container-fluid" style="max-width: 960px;">	
-	<div class="row">	
-		<div class="text-center">
-			<form role="form" action="#">
-	       		<input type="hidden" id="post_cover" value=""/>
+<div class="container wraper container-fluid" style="max-width: 960px;">
+	<form id="add_article_form" role="form" method="post" onsubmit="return add_article();">	
+		<div class="row">	
+			<div class="text-center">
+	       		<input type="hidden" name="post_cover" id="post_cover" value=""/>
+	       		<input type="hidden" name="is_pub" value="1"/>
 	        	<img id="upload_img" src="http://127.0.0.1:8080/writty/assets/img/AAH8gG_dWpI710.jpg" 
 	        		width="480" height="260" onclick="doUpload()" style="cursor: pointer;" class="br-radius"/>
-	                    <input type="file" name="fileUpload" class="fileUpload ladda-button" data-style="zoom-out" 
-	                    	accept="image/png,image/jpg,image/jpeg" style="display: none;"/>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="m-t-20">
-			<input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入文章标题" style="height: 50px;"/>
-		</div>
-		<div class="m-t-20">
-			<textarea id="write_content" rows="100" cols="20">书写你的内容！</textarea>
-			<div class="row" style="padding: 10px;">
-                <select class="select2" multiple data-placeholder="请选择专栏...">
-                  <option value="United States">Java那点事</option>
-                  <option value="United Kingdom">运维跟我学</option>
-                  <option value="Afghanistan">良辰带你学Swift开发</option>
-                </select>
-			</div>
-			<div class="m-t-10 pull-right">
-				<button type="submit" class="btn btn-success m-l-10">发布文章</button>
+	            <input type="file" name="fileUpload" class="fileUpload ladda-button" data-style="zoom-out" 
+	            	accept="image/png,image/jpg,image/jpeg" style="display: none;"/>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="m-t-20">
+				<input type="text" name="title" class="form-control" placeholder="请输入文章标题" style="height: 50px;"/>
+			</div>
+			<div class="m-t-20">
+				<textarea id="write_content" name="content" rows="100" cols="20">书写你的内容！</textarea>
+				<div class="row" style="padding: 10px;">
+	                <select name="sid" class="select2" multiple data-placeholder="请选择专栏...">
+	                	#for(item : specials)
+	                	<option value="${item.id}">${item.title}</option>
+	                	#end
+	                </select>
+				</div>
+				<div class="m-t-10 pull-right">
+					<button type="submit" class="btn btn-success m-l-10">发布文章</button>
+				</div>
+			</div>
+		</div>
+	</form>
 	<!-- End row -->
 </div>
 <!-- END Wraper -->

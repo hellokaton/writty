@@ -2,10 +2,15 @@
 /* Space out content a bit */
 body {
   background-color: #fff;
+  color: #333;
 }
 
 .explore-list .panel-body{
 	padding: 0;
+}
+
+.post-detail{
+	font-size: 1.2em;
 }
 .summary-meta{
 	padding: 0;
@@ -21,31 +26,8 @@ body {
 	font-size: 1.2em;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-/* Custom page header */
-.header {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+.read-meta{
+	margin-top: 68px;
 }
 
 /* Customize container */
@@ -68,20 +50,11 @@ body {
   font-size: 21px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
-  .footer {
+  .marketing{
     padding-right: 0;
     padding-left: 0;
   }

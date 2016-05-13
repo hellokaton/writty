@@ -20,7 +20,7 @@ public class IndexController extends BaseController {
 	
 	@Route(value = "/specials/random", method = HttpMethod.GET)
 	public void getRandomSpecials(Request request, Response response){
-		List<Map<String, Object>> specials = specialService.getRandomList(8);
+		List<Map<String, Object>> specials = specialService.getRandomList();
 		response.json(this.JSONRes("specials", specials));
 	}
 	

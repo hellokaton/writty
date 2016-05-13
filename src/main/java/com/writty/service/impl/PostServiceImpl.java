@@ -1,21 +1,26 @@
 package com.writty.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.AR;
 import com.blade.jdbc.Page;
 import com.blade.jdbc.QueryParam;
+import com.writty.kit.QiniuKit;
+import com.writty.kit.Utils;
 import com.writty.model.Post;
 import com.writty.model.User;
 import com.writty.service.PostService;
 import com.writty.service.UserService;
 
 import blade.kit.DateKit;
+import blade.kit.FileKit;
 import blade.kit.StringKit;
 
 @Service
@@ -31,6 +36,14 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	public Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count) {
+		
+		if(null == page || page < 1){
+			page = 1;
+		}
+		if(null == count || count < 1){
+			count = 10;
+		}
+		
 		QueryParam up = QueryParam.me();
 		if(StringKit.isNotBlank(title)){
 			up.like("title", "%"+title+"%");
@@ -82,6 +95,9 @@ public class PostServiceImpl implements PostService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pid", post.getPid());
 			map.put("title", post.getTitle());
+			map.put("comments", post.getComments());
+			map.put("cover", QiniuKit.getUrl(post.getCover()));
+			map.put("content", Utils.markdown2html(post.getContent()));
 			map.put("created", post.getCreated());
 			map.put("create_date", DateKit.formatDateByUnixTime(post.getCreated().longValue(), "yyyy-MM-dd"));
 			map.put("user_name", user.getUser_name());
@@ -98,8 +114,27 @@ public class PostServiceImpl implements PostService {
 		
 		try {
 			Integer time = DateKit.getCurrentUnixTime();
-			AR.update("insert into t_post(title, slug, uid, sid, cover, content, is_pub, created, updated) values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-					title, slug, uid,  sid, cover, content, is_pub, time, time).executeUpdate();
+			
+			String pid = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+			
+			String cover_key = "";
+			File file = new File(cover);
+			if(file.exists()){
+				String ext = FileKit.getExtension(file.getName());
+				if(StringKit.isBlank(ext)){
+					ext = "png";
+				}
+				
+				String key = "post/" + pid + "." + ext;
+				
+				boolean flag = QiniuKit.upload(file, key);
+				if(flag){
+					cover_key = key;
+				}
+			}
+			
+			AR.update("insert into t_post(pid, title, slug, uid, sid, cover, content, is_pub, created, updated) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					pid, title, slug, uid,  sid, cover_key, content, is_pub, time, time).executeUpdate();
 			
 			return true;
 		} catch (Exception e) {

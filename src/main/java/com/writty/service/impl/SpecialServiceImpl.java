@@ -198,17 +198,15 @@ public class SpecialServiceImpl implements SpecialService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getRandomList(Integer count) {
-		if(null != count){
-			
-			Integer max_sid = AR.find("select max(sid) from t_special").first(Integer.class) + 1;
-			
-			int[] randoms = Utils.randomCommon(1, max_sid, count);
-			
-			List<Special> specials = AR.find("select * from t_special where sid in(?)", AR.in(randoms)).list(Special.class);
-			return this.getListMap(specials);
-		}
-		return null;
+	public List<Map<String, Object>> getRandomList() {
+		
+		Integer max_sid = AR.find("select max(id) from t_special").first(Integer.class) + 1;
+		
+		int[] randoms = Utils.randomCommon(1, max_sid, 8);
+		List<Special> specials = AR.find("select * from t_special where id in(?, ?, ?, ?, ?, ?, ?, ?)", 
+				randoms[0], randoms[1], randoms[2], randoms[3], 
+				randoms[4], randoms[5], randoms[6], randoms[7]).list(Special.class);
+		return this.getListMap(specials);
 	}
 		
 }

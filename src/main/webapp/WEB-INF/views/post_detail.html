@@ -1,0 +1,19 @@
+#include("./common/header.html", {title:'文章详情'})
+ <link href="${base}/assets/css/explore.css" rel="stylesheet" />
+<!-- Page Content Start -->
+<div class="container wraper container-fluid" style="max-width: 768px;">
+	<div class="row">	
+		<div style="background-image: url(${postMap.cover});"></div>
+		<div>
+			<h3>${postMap.title}</h3>
+		</div>
+		<div class="post-detail">
+			${postMap.content}
+		</div>
+	</div>
+	<!-- End row -->
+</div>
+<!-- END Wraper -->
+#include("./common/footer.html")
+</body>
+</html>

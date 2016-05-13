@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.blade.ioc.annotation.Inject;
+import com.blade.jdbc.Page;
 import com.blade.route.annotation.Path;
 import com.blade.route.annotation.PathVariable;
 import com.blade.route.annotation.Route;
@@ -38,7 +39,7 @@ public class IndexController extends BaseController {
 	@Route(value = "/", method = HttpMethod.GET)
 	public ModelAndView show_home(Request request, Response response){
 		
-		List<Map<String, Object>> specials = specialService.getRandomList(8);
+		List<Map<String, Object>> specials = specialService.getRandomList();
 		request.attribute("specials", specials);
 		
 		return this.getView("home");
@@ -65,7 +66,18 @@ public class IndexController extends BaseController {
 	 */
 	@Route(value = "/explore", method = HttpMethod.GET)
 	public ModelAndView show_explore(Request request, Response response){
+		Integer page = request.queryAsInt("p");
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, page, 10);
+		request.attribute("postPage", postPage);
 		return this.getView("explore");
+	}
+	
+	/**
+	 * 专栏页面
+	 */
+	@Route(value = "/specials", method = HttpMethod.GET)
+	public ModelAndView show_specials(Request request, Response response){
+		return this.getView("specials");
 	}
 	
 	/**

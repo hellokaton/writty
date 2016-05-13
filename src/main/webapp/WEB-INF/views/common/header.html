@@ -37,14 +37,14 @@
 			          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 			            <span class="sr-only">Toggle navigation</span>
 			          </button>
-			          <a class="navbar-brand" href="#">Writty</a>
+			          <a class="navbar-brand" href="${base_url('')}">Writty</a>
 			        </div>
 	                <!-- Left navbar -->
 	                <nav class=" navbar-default hidden-xs" role="navigation">
 	                    <ul class="nav navbar-nav">
 	                        <li><a href="${base_url('')}">首页</a></li>
 	                        <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}">发现</a></li>
-	                        <li #if(active=='special')class="active"#end><a href="${base_url('/special')}">专栏</a></li>
+	                        <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}">专栏</a></li>
 	                        <li #if(active=='about')class="active"#end><a href="${base_url('/about')}">关于</a></li>
 	                    </ul>
 	                </nav>

@@ -1,6 +1,11 @@
 package com.writty.controller;
 
+import java.io.File;
+import java.util.List;
+
+import com.blade.Blade;
 import com.blade.ioc.annotation.Inject;
+import com.blade.jdbc.QueryParam;
 import com.blade.route.annotation.Path;
 import com.blade.route.annotation.Route;
 import com.blade.view.ModelAndView;
@@ -8,9 +13,11 @@ import com.blade.web.http.HttpMethod;
 import com.blade.web.http.Request;
 import com.blade.web.http.Response;
 import com.writty.kit.SessionKit;
+import com.writty.model.Special;
 import com.writty.model.User;
 import com.writty.service.FavoriteService;
 import com.writty.service.PostService;
+import com.writty.service.SpecialService;
 import com.writty.service.UserService;
 
 import blade.kit.StringKit;
@@ -27,6 +34,9 @@ public class ArticleController extends BaseController {
 	@Inject
 	private FavoriteService favoriteService;
 	
+	@Inject
+	private SpecialService specialService;
+	
 	/**
 	 * 写文章页面
 	 */
@@ -37,6 +47,13 @@ public class ArticleController extends BaseController {
 			response.go("/");
 			return null;
 		}
+		
+		QueryParam where = QueryParam.me();
+		where.gt("id", 0);
+		where.orderby("post_count desc");
+		List<Special> specials = specialService.getSpecialList(where);
+		request.attribute("specials", specials);
+		
 		return this.getView("write");
 	}
 	
@@ -52,7 +69,7 @@ public class ArticleController extends BaseController {
 		}
 		
 		String title = request.query("title");
-		String cover = request.query("cover");
+		String cover = request.query("post_cover");
 		String content = request.query("content");
 		Long sid = request.queryAsLong("sid");
 		Integer is_pub = request.queryAsInt("is_pub");
@@ -73,6 +90,10 @@ public class ArticleController extends BaseController {
 		if(content.length() < 100){
 			this.error(response, "请输入100字以上的文章内容");
 			return;
+		}
+		
+		if(StringKit.isNotBlank(cover)){
+			cover = Blade.me().webRoot() + File.separator + cover;
 		}
 		
 		boolean flag = postService.save(title, null, user.getUid(), sid, is_pub, cover, content);
