@@ -117,62 +117,6 @@ public class UserController extends BaseController {
 	}
 	
 	/**
-	 * 写文章页面
-	 */
-	@Route(value = "/write", method = HttpMethod.GET)
-	public ModelAndView show_write(Request request, Response response){
-		User user = SessionKit.getLoginUser();
-		if(null == user){
-			response.go("/");
-			return null;
-		}
-		return this.getView("write");
-	}
-	
-	/**
-	 * 保存文章
-	 */
-	@Route(value = "/write", method = HttpMethod.POST)
-	public void save_write(Request request, Response response){
-		User user = SessionKit.getLoginUser();
-		if(null == user){
-			this.nosignin(response);
-			return;
-		}
-		
-		String title = request.query("title");
-		String cover = request.query("cover");
-		String content = request.query("content");
-		Long sid = request.queryAsLong("sid");
-		Integer is_pub = request.queryAsInt("is_pub");
-		
-		if(StringKit.isBlank(title) || 
-				StringKit.isBlank(cover) ||
-				StringKit.isBlank(content) ||
-				null == sid || null == is_pub){
-			this.error(response, "参数不能为空");
-			return;
-		}
-		
-		if(title.length() < 5 || title.length() > 20){
-			this.error(response, "请输入5-20个字符长度的标题");
-			return;
-		}
-		
-		if(content.length() < 100){
-			this.error(response, "请输入100字以上的文章内容");
-			return;
-		}
-		
-		boolean flag = postService.save(title, null, user.getUid(), sid, is_pub, cover, content);
-		if(flag){
-			this.success(response, "");
-		} else {
-			this.error(response, "文章发布失败");
-		}
-	}
-	
-	/**
 	 * 上传头像
 	 */
 	@Route(value = "/uploadimg", method = HttpMethod.POST)
