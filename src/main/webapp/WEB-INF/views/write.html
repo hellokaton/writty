@@ -1,0 +1,94 @@
+#include("./common/header.html", {title:'写文章'})
+<link href="${cdn}/assets/simplemde/simplemde.min.css" rel="stylesheet" />
+<link href="${cdn}/assets/select2/select2.css" rel="stylesheet" />
+<link href="${cdn}/assets/css/explore.css" rel="stylesheet" />
+<!-- Page Content Start -->
+<div class="container wraper container-fluid" style="max-width: 960px;">	
+	<div class="row">	
+		<div class="text-center">
+			<form role="form" action="#">
+	       		<input type="hidden" id="post_cover" value=""/>
+	        	<img id="upload_img" src="http://127.0.0.1:8080/writty/assets/img/AAH8gG_dWpI710.jpg" 
+	        		width="480" height="260" onclick="doUpload()" style="cursor: pointer;" class="br-radius"/>
+	                    <input type="file" name="fileUpload" class="fileUpload ladda-button" data-style="zoom-out" 
+	                    	accept="image/png,image/jpg,image/jpeg" style="display: none;"/>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="m-t-20">
+			<input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入文章标题" style="height: 50px;"/>
+		</div>
+		<div class="m-t-20">
+			<textarea id="write_content" rows="100" cols="20">书写你的内容！</textarea>
+			<div class="row" style="padding: 10px;">
+                <select class="select2" multiple data-placeholder="请选择专栏...">
+                  <option value="United States">Java那点事</option>
+                  <option value="United Kingdom">运维跟我学</option>
+                  <option value="Afghanistan">良辰带你学Swift开发</option>
+                </select>
+			</div>
+			<div class="m-t-10 pull-right">
+				<button type="submit" class="btn btn-success m-l-10">发布文章</button>
+			</div>
+		</div>
+	</div>
+	<!-- End row -->
+</div>
+<!-- END Wraper -->
+#include("./common/footer.html")
+<!-- Page Specific JS Libraries -->
+<script src="${cdn}/assets/simplemde/simplemde.min.js"></script>
+<script src="${cdn}/assets/select2/select2.min.js" type="text/javascript"></script>
+<script src="${cdn}/assets/js/jquery.liteuploader.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	new SimpleMDE({
+		element: document.getElementById("write_content"),
+		spellChecker: false,
+		autosave: {
+			enabled: false,
+			unique_id: "write_content",
+		},
+	});
+	// Select2
+    $(".select2").select2({
+        width: '100%'
+    });
+	$(".fileUpload").liteUploader({
+	    script: "${base_url('/uploadimg')}",
+	    params: {type:'avatar'},
+	    rules: {
+	        allowedFileTypes: "image/jpeg,image/png,image/jpeg",
+	        maxSize: 512000
+		}
+	}).on("lu:success", function (e, data) {
+		  if(data){
+		  	$("#upload_img").attr('src', data.url);
+			$("#post_cover").val(data.savepath);
+		  }
+	}).on("lu:errors", function (e, data) {
+		console.log(data);
+		if(data && data.length > 0){
+			var item = data[0];
+			if(item && item.errors && item.errors.length > 0){
+				var err = item.errors[0];
+				if(err.type == 'size'){
+					alertError("图片大小超出限制,请重新上传");				
+				}
+			}
+		}
+	});
+	
+	$(".fileUpload").change(function () {
+	    $(this).data("liteUploader").startUpload();
+	});
+});
+//上传方法
+function doUpload() {
+	$(".fileUpload").click();
+}
+</script>
+</body>
+</html>

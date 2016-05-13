@@ -9,16 +9,20 @@ import com.writty.model.User;
 
 public interface UserService {
 	
-	public User getUser(Integer uid);
+	User getUser(Long uid);
 	
-	public User getUser(QueryParam where);
+	List<User> getUserList(QueryParam where);
 	
-	public List<User> getUserList(QueryParam where);
+	Page<User> getPageList(QueryParam where);
 	
-	public Page<User> getPageList(QueryParam where);
-	
-	public boolean save( String userName, String passWord, String nickName, String avatar, Integer roleId, Integer created, Integer updated, Integer logined );
-	
-	public boolean delete(Integer uid);
+	boolean delete(Long uid);
+
+	User signin(String userName, String passWord);
+
+	User saveGithubUser(String login, String name, String avatar_url, Long open_id);
+
+	boolean updateRole(Long uid, Integer role_id);
+
+	boolean updatePwd(Long uid, String newpwd);
 		
 }

@@ -12,16 +12,16 @@ public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	
 	//文章id
 	private String pid;
 	
 	//评论id
-	private Integer cid;
+	private Long cid;
 	
 	//发布评论的用户
-	private Integer uid;
+	private Long uid;
 	
 	//评论人昵称
 	private String nick_name;
@@ -40,11 +40,11 @@ public class Comment implements Serializable {
 	
 	public Comment(){}
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -56,19 +56,19 @@ public class Comment implements Serializable {
 		this.pid = pid;
 	}
 	
-	public Integer getCid() {
+	public Long getCid() {
 		return cid;
 	}
 
-	public void setCid(Integer cid) {
+	public void setCid(Long cid) {
 		this.cid = cid;
 	}
 	
-	public Integer getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(Integer uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 	

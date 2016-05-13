@@ -12,7 +12,7 @@ public class Link implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	
 	//链接名称
 	private String title;
@@ -28,11 +28,11 @@ public class Link implements Serializable {
 	
 	public Link(){}
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//用户id
-	private Integer uid;
+	private Long uid;
 	
 	//登录名
 	private String user_name;
@@ -41,11 +41,11 @@ public class User implements Serializable {
 	
 	public User(){}
 	
-	public Integer getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(Integer uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 	

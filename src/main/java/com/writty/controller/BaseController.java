@@ -29,11 +29,11 @@ public class BaseController {
 	}
 	
 	public ModelAndView getAdminView(String view){
-		return this.getView("/admin/" + view);
+		return this.getAdminView(new HashMap<String, Object>(), view);
 	}
 	
 	public ModelAndView getAdminView(Map<String, Object> map, String view){
-		return this.getView(map, "/admin/" + view);
+		return new ModelAndView(map, "/admin/" + view + ".html");
 	}
 	
 	public void success(Response response, Object data){

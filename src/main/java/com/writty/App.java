@@ -16,6 +16,7 @@ import com.writty.ext.Methods;
 import com.writty.service.OptionsService;
 
 import blade.kit.AES;
+import blade.kit.StringKit;
 import jetbrick.template.resolver.GlobalResolver;
 
 public class App extends Bootstrap {
@@ -41,21 +42,29 @@ public class App extends Bootstrap {
 				blade.config().get("jdbc.pass"), true);
 		
 		// 开启数据库缓存
-		if(blade.config().getAsBoolean("app.db_cahce")){
+		if(blade.config().getAsBoolean("writty.db_cahce")){
 			DB.setCache(new FIFOCache());
 		}
 		
 		// 初始化配置
-		Constant.SITE_URL = blade.config().get("app.site_url");
-		Constant.APP_VERSION = blade.config().get("app.version");
-		AES.setKey(blade.config().get("app.aes_salt"));
-		Constant.CDN_URL = blade.config().get("qiniu.cdn");
+		Constant.SITE_URL = blade.config().get("writty.site_url");
+		Constant.APP_VERSION = blade.config().get("writty.version");
+		AES.setKey(blade.config().get("writty.aes_salt"));
+		Constant.CDN_URL = Constant.SITE_URL;
+		if(StringKit.isNotBlank(blade.config().get("qiniu.cdn"))){
+			Constant.CDN_URL = blade.config().get("qiniu.cdn");
+		}
 		
 		// csrf 防御
 		CSRFConfig conf = new CSRFConfig();
-		conf.setSecret(blade.config().get("app.aes_salt"));
+		conf.setSecret(blade.config().get("writty.aes_salt"));
 		conf.setSetHeader(true);
 		CSRFTokenManager.config(conf);
+		
+		// github授权key
+		Constant.GITHUB_CLIENT_ID = blade.config().get("github.CLIENT_ID");
+		Constant.GITHUB_CLIENT_SECRET = blade.config().get("github.CLIENT_SECRET");
+		Constant.GITHUB_REDIRECT_URL = blade.config().get("github.REDIRECT_URL");
 	}
 	
 	@Override

@@ -1,70 +1,99 @@
 <!DOCTYPE html>
-<html class=no-js>
+<html lang="en">
 <head>
-<meta charset=utf-8>
-<title>Java China - ${title}</title>
-<meta name=description content="">
-<meta name=viewport content="width=device-width">
-<link rel="shortcut icon" href="${base}/assets/favicon.ico"/>
-<link type="text/css" rel="stylesheet" href="${cdn}/assets/font-awesome-4.6.1/css/font-awesome.min.css?ver=${version}" />
-<link type="text/css" rel="stylesheet" href="${cdn}/assets/lib/sweet-alert/sweetalert.min.css?ver=${version}" />
-<link type="text/css" rel=stylesheet href="${base}/assets/styles/admin.css" />
-<script type="text/javascript" src="${cdn}/assets/scripts/jquery-2.2.0.min.js?ver=${version}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+    <link rel="shortcut icon" href="img/favicon_1.ico">
+    <title>biezhi - Writty Admin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="${cdn}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${cdn}/assets/css/bootstrap-reset.css" rel="stylesheet">
+    <!--Animation css-->
+    <link href="${cdn}/assets/css/animate.css" rel="stylesheet">
+     <!--Icon-fonts css-->
+    <link href="${cdn}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${cdn}/assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
+    <link href="${cdn}/assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<!-- Plugins css -->
+    <link href="${cdn}/assets/sweet-alert/sweetalert.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
+    <link href="${cdn}/assets/css/style.css" rel="stylesheet">
+    <link href="${cdn}/assets/css/helper.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="${cdn}/assets/js/html5shiv.js"></script>
+      <script src="${cdn}/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
 <body>
-<div class="app layout-fixed-header">
-	<div class="sidebar-panel offscreen-left">
-		<div class=brand>
-			<div class=brand-logo>
-				<img src="${base}/assets/images/logo1.png" height=15 alt="">
-			</div>
-			<a href=javascript:;
-				class="toggle-sidebar hidden-xs hamburger-icon v3"
-				data-toggle=layout-small-menu> <span></span> <span></span> <span></span>
-				<span></span>
-			</a>
-		</div>
-		<nav role=navigation>
-			<ul class=nav>
-				<li class="#if(active=='home')open#end"><a href="${base_url('/admin')}"> <i class="fa fa-flask"></i> <span>仪表盘</span></a></li>
-				<li class="#if(active=='nodes')open#end"><a href="${base_url('/admin/nodes')}"> <i class="fa fa-leaf"></i> <span>节点管理</span></a></li>
-				<li class="#if(active=='users')open#end"><a href="${base_url('/admin/users')}"> <i class="fa fa-user"></i> <span>用户管理</span></a></li>
-				<li class="#if(active=='settings')open#end"><a href="${base_url('/admin/settings')}"> <i class="fa fa-gears"></i> <span>系统设置</span></a></li>
-				<li class="#if(active=='tools')open#end"><a href="${base_url('/admin/tools')}"> <i class="fa fa-paw"></i> <span>系统工具</span></a></li>
-			</ul>
-		</nav>
-	</div>
-	<div class=main-panel>
-		<header class="header navbar">
-			<div class="brand visible-xs">
-				<div class=toggle-offscreen>
-					<a href=# class="hamburger-icon visible-xs" data-toggle=offscreen
-						data-move=ltr> <span></span> <span></span> <span></span>
-					</a>
-				</div>
-				<div class=brand-logo>
-					<img src="${base}/assets/images/logo.png" height=15 alt="">
-				</div>
-			</div>
-			<ul class="nav navbar-nav hidden-xs">
-				<p>
-					<ol class="breadcrumb">
-						<li><a href="/admin">仪表盘</a></li>
-						<li class="active ng-binding">${title}</li>
-					</ol>
-				</p>
-			</ul>
-			<ul class="nav navbar-nav navbar-right hidden-xs">
-				<li>
-					<a href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="${login_user.avatar}"
-							class="header-avatar img-circle ml10" alt="${login_user.user_name}" title="${login_user.user_name}">
-							<span class=pull-left>管理员：${login_user.user_name}</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="${base_url('/')}">回到主页</a></li>
-						<li><a href="${base_url('/admin/settings')}">系统设置</a></li>
-						<li><a href="${base_url('/logout')}">注销</a></li>
-					</ul>
-				</li>
-			</ul>
-		</header>
+        <!-- Aside Start-->
+        <aside class="left-panel">
+            <!-- brand -->
+            <div class="logo">
+                <a href="index.html" class="logo-expanded">
+                    <i class="ion-social-buffer"></i>
+                    <span class="nav-label">Writty</span>
+                </a>
+            </div>
+            <!-- / brand -->
+            <!-- Navbar Start -->
+            <nav class="navigation">
+                <ul class="list-unstyled">
+                    <li #if(active=='home')class="active"#end><a href="${base_url('/admin')}"><i class="ion-home"></i> <span class="nav-label">仪表盘</span></a></li>
+                    <li #if(active=='post')class="active"#end><a href="${base_url('/admin/posts')}"><i class="ion-document-text"></i> <span class="nav-label">文章管理</span></a></li>
+                    <li #if(active=='special')class="active"#end><a href="${base_url('/admin/specials')}"><i class="ion-ios7-pricetag"></i> <span class="nav-label">专栏管理</span></a></li>
+                    <li #if(active=='user')class="active"#end><a href="${base_url('/admin/users')}"><i class="ion-ios7-pricetag"></i> <span class="nav-label">用户管理</span></a></li>
+                    <li #if(active=='link')class="active"#end><a href="${base_url('/admin/links')}"><i class="ion-link"></i> <span class="nav-label">友链管理</span></a></li>
+                    <li #if(active=='sys')class="active"#end><a href="${base_url('/admin/sys_setting')}"><i class="ion-settings"></i> <span class="nav-label">系统设置</span></a></li>
+                </ul>
+            </nav>
+                
+        </aside>
+        <!-- Aside Ends-->
+        
+        <!--Main Content Start -->
+        <section class="content">
+            
+            <!-- Header -->
+            <header class="top-head container-fluid">
+                <button type="button" class="navbar-toggle pull-left">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <!-- Search -->
+                <!-- <form role="search" class="navbar-left app-search pull-left hidden-xs">
+                  <input type="text" placeholder="搜索..." class="form-control">
+                  <a href=""><i class="fa fa-search"></i></a>
+                </form> -->
+                
+                <!-- Right navbar -->
+                <ul class="list-inline navbar-right top-menu top-right-menu">  
+                    <!-- mesages -->  
+
+                    <!-- user login dropdown start-->
+                    <li class="dropdown text-center">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="${cdn}/assets/img/avatar.jpg" class="img-circle profile-img thumb-sm">
+                            <span class="username">王爵</span> <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu extended pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
+                            <li><a href="${base_url('/')}"><i class="fa fa-cog"></i> 回到首页</a></li>
+                            <li><a href="${base_url('/logout')}"><i class="fa fa-sign-out"></i> 注销</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->       
+                </ul>
+                <!-- End right navbar -->
+            </header>
+            <!-- Header Ends -->
+			
+            <!-- Page Content Start -->
+            <!-- ================== -->
+            <div class="wraper container-fluid">

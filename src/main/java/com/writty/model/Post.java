@@ -22,7 +22,10 @@ public class Post implements Serializable {
 	private String slug;
 	
 	//文章发布人
-	private Integer uid;
+	private Long uid;
+	
+	//所属专栏id
+	private Long sid;
 	
 	//文章封面图
 	private String cover;
@@ -36,11 +39,11 @@ public class Post implements Serializable {
 	//文章评论数
 	private Integer comments;
 	
+	//文章发布状态
+	private Integer is_pub;
+	
 	//文章发布时间
 	private Integer created;
-	
-	//是否是页面
-	private Integer is_page;
 	
 	//最后更新时间
 	private Integer updated;
@@ -71,11 +74,11 @@ public class Post implements Serializable {
 		this.slug = slug;
 	}
 	
-	public Integer getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(Integer uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 	
@@ -119,20 +122,28 @@ public class Post implements Serializable {
 		this.created = created;
 	}
 	
-	public Integer getIs_page() {
-		return is_page;
-	}
-
-	public void setIs_page(Integer is_page) {
-		this.is_page = is_page;
-	}
-	
 	public Integer getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Integer updated) {
 		this.updated = updated;
+	}
+
+	public Long getSid() {
+		return sid;
+	}
+
+	public void setSid(Long sid) {
+		this.sid = sid;
+	}
+
+	public Integer getIs_pub() {
+		return is_pub;
+	}
+	
+	public void setIs_pub(Integer is_pub) {
+		this.is_pub = is_pub;
 	}
 	
 }

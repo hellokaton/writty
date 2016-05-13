@@ -6,8 +6,6 @@ import java.util.Map;
 
 import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.AR;
-import com.blade.jdbc.Page;
-import com.blade.jdbc.QueryParam;
 import com.writty.model.Options;
 import com.writty.service.OptionsService;
 
@@ -19,33 +17,6 @@ public class OptionsServiceImpl implements OptionsService {
 	@Override
 	public Options getOptions(String okey) {
 		return AR.findById(Options.class, okey);
-	}
-	
-	@Override
-	public Options getOptions(QueryParam where) {
-		if(null != where){
-			return AR.find(where).first(Options.class);
-		}
-		return null;
-	}
-	
-	@Override
-	public List<Options> getOptionsList(QueryParam where) {
-		if(null != where){
-			return AR.find(where).list(Options.class);
-		}
-		return null;
-	}
-	
-	@Override
-	public Page<Options> getPageList(QueryParam where) {
-		Page<Options> pageOptions = AR.find(where).page(Options.class);
-		return pageOptions;
-	}
-	
-	@Override
-	public boolean save( String ovalue ) {
-		return false;
 	}
 	
 	@Override
@@ -67,6 +38,12 @@ public class OptionsServiceImpl implements OptionsService {
 			}
 		}
 		return map;
+	}
+	
+	@Override
+	public boolean update(String site_title, String site_keywords, String site_description) {
+		
+		return false;
 	}
 		
 }
