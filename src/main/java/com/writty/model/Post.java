@@ -33,8 +33,7 @@ public class Post implements Serializable {
 	//文章内容
 	private String content;
 	
-	//文章浏览量
-	private Integer views;
+	private Integer type;
 	
 	//文章评论数
 	private Integer comments;
@@ -98,14 +97,6 @@ public class Post implements Serializable {
 		this.content = content;
 	}
 	
-	public Integer getViews() {
-		return views;
-	}
-
-	public void setViews(Integer views) {
-		this.views = views;
-	}
-	
 	public Integer getComments() {
 		return comments;
 	}
@@ -144,6 +135,14 @@ public class Post implements Serializable {
 	
 	public void setIs_pub(Integer is_pub) {
 		this.is_pub = is_pub;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 }

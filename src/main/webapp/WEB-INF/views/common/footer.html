@@ -3,16 +3,18 @@
 <!-- Footer Ends -->
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="${cdn}/assets/js/jquery.js"></script>
-<script src="${cdn}/assets/js/bootstrap.min.js"></script>
-<script src="${cdn}/assets/js/pace.min.js"></script>
-<script src="${cdn}/assets/js/wow.min.js"></script>
-<script src="${cdn}/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="${cdn}/assets/jquery-knob/jquery.knob.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/jquery.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/pace.min.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/wow.min.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="${cdn}/assets/jquery-knob/jquery.knob.js"></script>
 <!-- owl-carousel -->
-<script src="${cdn}/assets/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="${cdn}/assets/owl-carousel/owl.carousel.js"></script>
+<!-- sweet alerts -->
+<script type="text/javascript" src="${cdn}/assets/sweet-alert/sweetalert.min.js"></script>
 <!--common script for all pages-->
-<script src="${cdn}/assets/js/jquery.app.js"></script>
+<script type="text/javascript" src="${cdn}/assets/js/jquery.app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         //owl carousel
@@ -24,18 +26,8 @@
             autoPlay:true
         });
     });
-    /* BEGIN SVG WEATHER ICON */
-    if (typeof Skycons !== 'undefined'){
-    var icons = new Skycons(
-        {"color": "#fff"},
-        {"resizeClear": true}
-        ), list  = [
-                "clear-day", "clear-night", "partly-cloudy-day",
-                "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind", "fog"], i;
-
-        for(i = list.length; i--; )
-        icons.set(list[i], list[i]);
-        icons.play();
-    };
+    
+    var BASE = '${base}';
+    var CDN_URL = '${cdn}';
 </script>
-<script src="${base}/assets/js/main.js"></script>
+<script type="text/javascript" src="${base}/assets/js/main.js"></script>

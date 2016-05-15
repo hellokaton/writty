@@ -73,11 +73,11 @@ public class ArticleController extends BaseController {
 		String content = request.query("content");
 		Long sid = request.queryAsLong("sid");
 		Integer is_pub = request.queryAsInt("is_pub");
+		Integer type = request.queryAsInt("type");
 		
 		if(StringKit.isBlank(title) || 
-				StringKit.isBlank(cover) ||
 				StringKit.isBlank(content) ||
-				null == sid || null == is_pub){
+				null == sid || null == is_pub || null == type){
 			this.error(response, "参数不能为空");
 			return;
 		}
@@ -96,7 +96,7 @@ public class ArticleController extends BaseController {
 			cover = Blade.me().webRoot() + File.separator + cover;
 		}
 		
-		boolean flag = postService.save(title, null, user.getUid(), sid, is_pub, cover, content);
+		boolean flag = postService.save(title, null, user.getUid(), sid, type, is_pub, cover, content);
 		if(flag){
 			this.success(response, "");
 		} else {

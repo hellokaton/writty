@@ -110,7 +110,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public boolean save( String title, String slug, Long uid, Long sid, Integer is_pub, String cover, String content) {
+	public boolean save( String title, String slug, Long uid, Long sid, Integer type, Integer is_pub, String cover, String content) {
 		
 		try {
 			Integer time = DateKit.getCurrentUnixTime();
@@ -133,8 +133,8 @@ public class PostServiceImpl implements PostService {
 				}
 			}
 			
-			AR.update("insert into t_post(pid, title, slug, uid, sid, cover, content, is_pub, created, updated) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-					pid, title, slug, uid,  sid, cover_key, content, is_pub, time, time).executeUpdate();
+			AR.update("insert into t_post(pid, title, slug, uid, sid, cover, content, type, is_pub, created, updated) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					pid, title, slug, uid,  sid, cover_key, content, type, is_pub, time, time).executeUpdate();
 			
 			return true;
 		} catch (Exception e) {

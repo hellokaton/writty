@@ -28,17 +28,25 @@ function len(o){
    return count;
 }  
 
-// 添加文章
-function add_article(){
-	var formData = $('#add_article_form').serialize();
-	$.post(BASE + '/write', formData, function(response){
-		if(response){
-			 if(response.status == 200){
-				 alertOk("文章发布成功！");
-			 } else {
-				 alertError(response.msg);
-			 }
+// 随机专栏
+function random_specials(){
+	$.get(BASE + '/api/specials/random', {}, function(response){
+		if(response && response.specials){
+			var html = '';
+			var data = response.specials;
+			for(i in data){
+				var item = data[i];
+				html += '<div class="col-sm-6 col-md-3">'+
+						'	<div class="panel special-row">'+
+						'		<div class="h4 text-blank"><a href="'+ BASE + '/s/' + item.id +'">'+ item.title +'</a></div>'+
+						'		<div class="m-t-20 m-b-10 description">'+
+						'			<span class="text-muted">'+ item.description +'</span>'+
+						'		</div>'+
+						'		<div class="text-right follow">'+ item.post_count +'篇文章，'+ item.follow_count +'关注</div>'+
+						'	</div>'+
+						'</div>';
+			}
+			$("div#specials").html(html);
 		}
 	});
-	return false;
 }

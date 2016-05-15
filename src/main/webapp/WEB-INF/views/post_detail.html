@@ -7,9 +7,33 @@
 		<div>
 			<h3>${postMap.title}</h3>
 		</div>
-		<div class="post-detail">
+		<div class="entry-mata">
+			<a href="#"><img src="${postMap.user_avatar}" class="img-circle profile-img thumb-sm"/>
+			<b>${postMap.publish_user}</b></a> 发布于 ${timespan(postMap.created)}
+		</div>
+		<div class="entry-content">
 			${postMap.content}
 		</div>
+		<hr />
+		<div class="entry-footer m-l-10">
+			<ul class="social-links list-inline p-b-10 ">
+				分享到：
+				<li><a title="" data-placement="top" data-toggle="tooltip"
+					class="tooltips" href="#" data-original-title="Weibo"><i
+						class="fa fa-weibo"></i></a></li>
+			</ul>
+		</div>
+		#if(null != login_user)
+		<hr />
+		<div class="entry-comments">
+			<div>
+				<textarea class="form-control" rows="3" placeholder="请输入评论..." style="max-width: 100%; max-height: 150px;" ></textarea>
+			</div>
+			<div class="pull-right m-t-10">
+				<button type="button" class="btn btn-primary btn-rounded m-b-5">发表评论</button>
+			</div>
+		</div>
+		#end
 	</div>
 	<!-- End row -->
 </div>

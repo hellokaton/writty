@@ -13,7 +13,7 @@ public interface PostService {
 	
 	Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count);
 	
-	boolean save(String title, String slug, Long uid, Long sid, Integer is_pub, String cover, String content);
+	boolean save(String title, String slug, Long uid, Long sid, Integer type, Integer is_pub, String cover, String content);
 	
 	boolean delete(String pid);
 		
