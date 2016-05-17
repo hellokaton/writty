@@ -42,13 +42,13 @@ Last Update: july 2015;
    - Responsive
 
 */
-@import url(//fonts.useso.com/css?family=Roboto:400,300,500,700);
+@import url(//fonts.gmirror.org/css?family=Roboto:400,300,500,700);
 
 /******** 1. General ********/
 body {
   color: #797979;
   background-color: #f5f5f5;
-  font-family: 'Roboto', sans-serif;
+  font-family: Arial, STXihei, 'Microsoft YaHei', 黑体, 宋体, sans-serif;
   padding: 0px !important;
   margin: 0px !important;
   font-size: 14px;

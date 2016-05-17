@@ -65,6 +65,7 @@ public class App extends Bootstrap {
 		Constant.GITHUB_CLIENT_ID = blade.config().get("github.CLIENT_ID");
 		Constant.GITHUB_CLIENT_SECRET = blade.config().get("github.CLIENT_SECRET");
 		Constant.GITHUB_REDIRECT_URL = blade.config().get("github.REDIRECT_URL");
+		
 	}
 	
 	@Override
