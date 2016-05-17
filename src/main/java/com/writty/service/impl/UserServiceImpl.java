@@ -1,5 +1,6 @@
 package com.writty.service.impl;
 
+import java.io.File;
 import java.util.List;
 
 import com.blade.ioc.annotation.Inject;
@@ -7,13 +8,17 @@ import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.AR;
 import com.blade.jdbc.Page;
 import com.blade.jdbc.QueryParam;
+import com.writty.kit.QiniuKit;
+import com.writty.kit.Utils;
 import com.writty.model.User;
 import com.writty.service.OpenService;
 import com.writty.service.UserService;
 
 import blade.kit.DateKit;
 import blade.kit.EncrypKit;
+import blade.kit.FileKit;
 import blade.kit.StringKit;
+import blade.kit.http.HttpRequest;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,15 +65,39 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User saveGithubUser(String login, String name, String avatar_url, Long open_id) {
-		if(StringKit.isNotBlank(login) && null != open_id){
+	public User saveGithubUser(final String user_name, String name, final String avatar_url, Long open_id) {
+		if(StringKit.isNotBlank(user_name) && null != open_id){
 			try {
 				Integer time = DateKit.getCurrentUnixTime();
-				Long uid = (Long) AR
+				final Long uid = (Long) AR
 						.update("insert into t_user(user_name, nick_name, avatar, created, updated) values(?, ?, ?, ?, ?)",
-								login, name, avatar_url, time, time)
+								user_name, name, avatar_url, time, time)
 						.key();
 				openService.save(open_id, uid);
+				
+				Runnable t = new Runnable() {
+					@Override
+					public void run() {
+						String ext = FileKit.getExtension(avatar_url);
+						if(StringKit.isBlank(ext)){
+							ext = "png";
+						}
+						
+						String fn = StringKit.getRandomChar(10) + "." + ext;
+						File file = new File(fn);
+						HttpRequest.get(avatar_url)
+								.readTimeout(5000)
+								.trustAllCerts().trustAllHosts().receive(file);
+						
+						String key = "avatar/" + user_name + "/" + StringKit.getRandomChar(4) + "." + ext;
+						boolean flag = QiniuKit.upload(file, key);
+						if(flag){
+							AR.update("update t_user set avatar = ? where uid = ?", key, uid).executeUpdate();
+						}
+						
+					}
+				};
+				Utils.runTask(t);
 				
 				return this.getUser(uid);
 			} catch (Exception e) {

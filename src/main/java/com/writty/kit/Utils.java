@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -143,10 +144,6 @@ public class Utils {
 		return Integer.valueOf(String.valueOf(tomorrow.getTimeInMillis()).substring(0, 10));
 	}
 	
-	public static void run(Runnable t){
-		Executors.newSingleThreadExecutor().submit(t);
-	}
-
 	final static Configuration config = Configuration.builder()
 			.setSafeMode(true)
             .setCodeBlockEmitter(new CodeBlockEmitter())
@@ -277,4 +274,10 @@ public class Utils {
 		return result;
 	}
 	
+	public static void runTask(Runnable runnable){
+		if(null != runnable){
+			ExecutorService executor = Executors.newSingleThreadExecutor();
+			executor.submit(runnable);
+		}
+	}
 }

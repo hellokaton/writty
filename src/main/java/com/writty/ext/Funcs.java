@@ -2,6 +2,7 @@ package com.writty.ext;
 
 import com.writty.Constant;
 import com.writty.kit.DateKit;
+import com.writty.kit.QiniuKit;
 
 import blade.kit.StringKit;
 
@@ -14,6 +15,18 @@ public class Funcs {
 	 */
 	public static String base_url(String path) {
 		return Constant.SITE_URL + path;
+	}
+	
+	/**
+	 * 获取七牛cdn url
+	 * @param path
+	 * @return
+	 */
+	public static String cdn_url(String path) {
+		if(StringKit.isNotBlank(path) && !path.startsWith("http://") && path.startsWith("https://")){
+			return QiniuKit.getUrl(path);
+		}
+		return path;
 	}
 	
 	/**

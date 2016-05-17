@@ -64,7 +64,10 @@ public class BaseInterceptor implements Interceptor {
 	            return false;
 	        }*/
 		}
-		CSRFTokenManager.createNewToken(request, response);
+		
+		if(request.method().equals("GET") && !request.isAjax()){
+			CSRFTokenManager.createNewToken(request, response);
+		}
 		
 		return true;
 	}

@@ -12,7 +12,6 @@ import com.blade.web.verify.CSRFConfig;
 import com.blade.web.verify.CSRFTokenManager;
 import com.bladejava.view.template.JetbrickTemplateEngine;
 import com.writty.ext.Funcs;
-import com.writty.ext.Methods;
 import com.writty.service.OptionsService;
 
 import blade.kit.AES;
@@ -31,7 +30,6 @@ public class App extends Bootstrap {
 		
 		GlobalResolver resolver = jetbrickTemplateEngine.getJetEngine().getGlobalResolver();
 		resolver.registerFunctions(Funcs.class);
-		resolver.registerMethods(Methods.class);
 		Constant.VIEW_CONTEXT = jetbrickTemplateEngine.getJetEngine().getGlobalContext();
 		blade.viewEngin(jetbrickTemplateEngine);
 		
