@@ -12,6 +12,7 @@
     <link href="${cdn}/assets/css/bootstrap-reset.css" rel="stylesheet">
     <!--Animation css-->
     <link href="${cdn}/assets/css/animate.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
      <!--Icon-fonts css-->
     <link href="${cdn}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="${cdn}/assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
@@ -43,9 +44,9 @@
 	                <nav class=" navbar-default hidden-xs" role="navigation">
 	                    <ul class="nav navbar-nav">
 	                        <li><a href="${base_url('')}">首页</a></li>
-	                        <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}">发现</a></li>
-	                        <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}">专栏</a></li>
-	                        <li #if(active=='about')class="active"#end><a href="${base_url('/about')}">关于</a></li>
+	                        <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}" data-remote="true">发现</a></li>
+	                        <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}" data-remote="true">专栏</a></li>
+	                        <li #if(active=='about')class="active"#end><a href="${base_url('/about')}" data-remote="true">关于</a></li>
 	                    </ul>
 	                </nav>
 	                

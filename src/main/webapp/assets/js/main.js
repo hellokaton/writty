@@ -1,5 +1,4 @@
 
-
 function alertError(msg){
 	swal({
 		title:"提示信息", 

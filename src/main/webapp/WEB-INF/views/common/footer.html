@@ -14,9 +14,20 @@
 <!-- sweet alerts -->
 <script type="text/javascript" src="${cdn}/assets/sweet-alert/sweetalert.min.js"></script>
 <!--common script for all pages-->
-<script type="text/javascript" src="${cdn}/assets/js/jquery.app.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
+    	$(document).pjax('a', 'body');
+    	
+    	$(document).on('pjax:start', function() {
+	   	    NProgress.start();
+	   	});
+	   	$(document).on('pjax:end', function() {
+	   		NProgress.done();
+	   	    self.siteBootUp();
+	   	});
+    	
         //owl carousel
         $("#velonic-slider,#velonic-slider-2").owlCarousel({
             navigation : true,
