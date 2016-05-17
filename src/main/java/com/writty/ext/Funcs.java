@@ -23,7 +23,7 @@ public class Funcs {
 	 * @return
 	 */
 	public static String cdn_url(String path) {
-		if(StringKit.isNotBlank(path) && !path.startsWith("http://") && path.startsWith("https://")){
+		if(StringKit.isNotBlank(path) && !path.startsWith("http://") && !path.startsWith("https://")){
 			return QiniuKit.getUrl(path);
 		}
 		return path;
