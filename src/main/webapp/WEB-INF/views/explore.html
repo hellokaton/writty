@@ -8,7 +8,9 @@
 		<div class="panel panel-default">
              <div class="panel-body"> 
                  <div class="col-md-5">
-                 	<img class="br-radius" src="${item.cover}" width="320" height="200"/>
+                 	<a href="${base_url('/p/') + item.pid}">
+                 		<img class="br-radius" src="${item.cover}" width="320" height="200"/>
+                 	</a>
                  </div>
                  <div class="col-md-7 summary-meta">
                  	<a href="${base_url('/p/') + item.pid}"><h3 class="text-blank">${item.title}</h3></a>

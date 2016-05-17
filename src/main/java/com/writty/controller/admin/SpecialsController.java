@@ -53,7 +53,7 @@ public class SpecialsController extends BaseController {
 	 */
 	@Route(value = "/specials/add", method = HttpMethod.GET)
 	public ModelAndView addSpecial(Request request, Response response){
-		return this.getAdminView("add_specials");
+		return this.getAdminView("add_special");
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class SpecialsController extends BaseController {
 	public ModelAndView editSpecial(@PathVariable(value="id") Long id, Request request, Response response){
 		Map<String, Object> special = specialService.getSpecialMap(null, id);
 		request.attribute("special", special);
-		return this.getAdminView("edit_specials");
+		return this.getAdminView("edit_special");
 	}
 	
 	/**
@@ -136,7 +136,9 @@ public class SpecialsController extends BaseController {
 		String slug = request.query("slug");
 		String cover = request.query("cover");
 		String description = request.query("description");
-		
+		if(StringKit.isNotBlank(cover)){
+			cover = Blade.me().webRoot() + File.separator + cover;
+		}
 		boolean flag = specialService.update(id, title, slug, cover, description);
 		if(flag){
 			this.success(response, "");

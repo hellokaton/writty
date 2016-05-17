@@ -27,16 +27,18 @@
 		</div>
 	</div>
 	<!-- End row -->
-
+	
 	<div id="specials" class="row text-center">
 		#for(item : specials)
 		<div class="col-sm-6 col-md-3">
-			<div class="panel special-row">
-				<div class="h4 text-blank"><a href="${base_url('/s/') + item.id}">${item.title}</a></div>
-				<div class="m-t-20 m-b-10 description">
-					<span class="text-muted">${item.description}</span>
+			<div class="portlet">
+				<a href="${base_url('/s/') + item.id}" style="color: white;">
+					<div class="panel special-row" style="background-image: url('${cdn_url(item.cover)}'); background-size: cover;">
+					</div>
+				</a>
+				<div style="height: 20px; line-height: 1px; margin-top: -10px; margin-bottom: 10px;">
+					<a href="${base_url('/s/') + item.id}"><h4>${item.title}</h4></a>
 				</div>
-				<div class="text-right follow">${item.post_count}篇文章，${item.follow_count}关注</div>
 			</div>
 		</div>
 		#end

@@ -41,6 +41,13 @@ public class SpecialServiceImpl implements SpecialService {
 		if(StringKit.isNotBlank(title)){
 			up.like("title", "%"+title+"%");
 		}
+		if(null == page || page < 1){
+			page = 1;
+		}
+		
+		if(null == count || count < 1){
+			count = 10;
+		}
 		up.orderby("id desc").page(page, count);
 		Page<Special> pageSpecial = AR.find(up).page(Special.class);
 		return this.getPageListMap(pageSpecial);
@@ -151,20 +158,19 @@ public class SpecialServiceImpl implements SpecialService {
 		
 		StringBuffer updateSql = new StringBuffer("update t_special set ");
 		List<Object> params = new ArrayList<Object>();
-		params.add(DateKit.getCurrentUnixTime());
 		
 		if(StringKit.isNotBlank(title)){
-			updateSql.append(", title = ?");
+			updateSql.append("title = ?, ");
 			params.add(title);
 		}
 		
 		if(StringKit.isNotBlank(slug)){
-			updateSql.append(", slug = ?");
+			updateSql.append("slug = ?, ");
 			params.add(slug);
 		}
 		
 		if(null != description){
-			updateSql.append(", description = ?");
+			updateSql.append("description = ?, ");
 			params.add(description);
 		}
 		
@@ -179,16 +185,15 @@ public class SpecialServiceImpl implements SpecialService {
 			
 			boolean flag = QiniuKit.upload(file, key);
 			if(flag){
-				updateSql.append(", cover = ?");
+				updateSql.append("cover = ?, ");
 				params.add(key);
 			}
 		}
-		
-		updateSql.append(" where id = ?");
+		String sql = updateSql.substring(0, updateSql.length() - 2) + " where id = ?"; 
 		params.add(id);
 		
 		try {
-			AR.update(updateSql.toString(), params.toArray()).executeUpdate();
+			AR.update(sql, params.toArray()).executeUpdate();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,7 +207,7 @@ public class SpecialServiceImpl implements SpecialService {
 		
 		Integer max_sid = AR.find("select max(id) from t_special").first(Integer.class) + 1;
 		
-		int[] randoms = Utils.randomCommon(1, max_sid, 8);
+		int[] randoms = Utils.randomCommon(1000, max_sid, 8);
 		List<Special> specials = AR.find("select * from t_special where id in(?, ?, ?, ?, ?, ?, ?, ?)", 
 				randoms[0], randoms[1], randoms[2], randoms[3], 
 				randoms[4], randoms[5], randoms[6], randoms[7]).list(Special.class);

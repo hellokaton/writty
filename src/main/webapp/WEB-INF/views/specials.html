@@ -3,7 +3,40 @@
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
 	<div class="row explore-list">	
+		#if(null != specialPage)
+		<div id="specials" class="row text-center">
+			#for(item : specialPage.results)
+			<div class="col-sm-6 col-md-3">
+				<div class="portlet">
+					<a href="${base_url('/s/') + item.id}" style="color: white;">
+					<div class="panel special-row" style="background-image: url('${cdn_url(item.cover)}'); background-size: cover;">
+						<div style="height: 30px; line-height: 30px; padding-top: 90px;">
+							${item.title}
+						</div>
+					</div>
+					</a>
+					
+					<div class="text-right" style="height: 20px; line-height: 1px; padding-right: 5px;">
+						${item.post_count}篇文章，${item.follow_count}关注
+					</div>
+				</div>
+			</div>
+			#end
+		</div>
+		#if(specialPage.totalPage > 1)
 		
+		#if(specialPage.page > 1)
+		<div class="btn-group pull-left m-t-10 m-b-10">
+			<a href="${base_url('/specials?p=') + specialPage.prev_page}" class="btn btn-default">上一页</a>
+		</div>
+		#end
+		#if(specialPage.totalPage > 1 && specialPage.page != specialPage.totalPage)
+		<div class="btn-group pull-right m-t-10 m-b-10">
+			<a href="${base_url('/specials?p=') + specialPage.next_page}"  class="btn btn-default">下一页</a>
+		</div>
+		#end
+		#end
+		#end
 	</div>
 	<!-- End row -->
 </div>

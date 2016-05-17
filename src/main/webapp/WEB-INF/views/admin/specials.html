@@ -43,9 +43,9 @@
                                         <td>${item.follow_count}</td>
                                         <td>${item.create_date}</td>
                                         <td>
-                                        	<button class="btn btn-danger btn-sm m-b-5">删除</button>
-                                        	<button class="btn btn-primary btn-sm m-b-5">编辑</button>
-                                        	<button class="btn btn-success btn-sm m-b-5">预览</button>
+                                        	<button class="btn btn-danger btn-sm m-b-5 del-special" id="${item.id}">删除</button>
+                                        	<a class="btn btn-primary btn-sm m-b-5" href="${base_url('/admin/specials/') + item.id}">编辑</a>
+                                        	<a class="btn btn-success btn-sm m-b-5" href="${base_url('/s/') + item.id}" target="_blank">预览</a>
                                         </td>
                                     </tr>
                                 	#end
@@ -56,10 +56,10 @@
                             #if(specialPage.totalPage > 1)
                             <div class="btn-group pull-right m-t-10 m-b-10">
                             	#if(specialPage.page > 1)
-                            	<a href="${base_url('/?p=') + specialPage.prev_page}" class="btn btn-default">上一页</a>
+                            	<a href="${base_url('/admin/specials?p=') + specialPage.prev_page}" class="btn btn-default">上一页</a>
                             	#end
 								#if(specialPage.totalPage > 1 && specialPage.page != specialPage.totalPage)
-								<a href="${base_url('/?p=') + specialPage.next_page}"  class="btn btn-default">下一页</a>
+								<a href="${base_url('/admin/specials?p=') + specialPage.next_page}"  class="btn btn-default">下一页</a>
 								#end
                              </div>
 							#end

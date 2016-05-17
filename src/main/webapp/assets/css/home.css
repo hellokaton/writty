@@ -1,17 +1,5 @@
-/*
-Template Name: Velonic Dashboard build with Bootstrap v3.3.4
-Template Version: 2.0
-Author: CoderThemes
-Email: coderthemes@gmail.com
-Date: Jan 2015
-Last Update: july 2015;
-*/
-
-
-
 /* TABLE OF CONTENTS
     1) General
-        1.1 Loader
     2) Left Panel
         2.1 Logo
         2.2 Navigation
@@ -33,14 +21,6 @@ Last Update: july 2015;
    16) Profile
    17) Timeline
    18) Pages (Log-in,Register Etc....)
-
-   ======= Version 1.1 ======
-   19) Flot-chart / Rickshaw
-
-
-   ====== Version 2.0 =====
-   - Responsive
-
 */
 @import url(//fonts.gmirror.org/css?family=Roboto:400,300,500,700);
 
@@ -60,63 +40,6 @@ html {
   min-height: 100%;
 }
 
-
-/* 1.1 Loader */
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-.pace-inactive {
-  display: none;
-}
-
-.pace .pace-progress {
-  background: #6e8cd7;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  right: 100%;
-  width: 100%;
-  height: 3px;
-}
-
-.pace .pace-progress-inner {
-  display: block;
-  position: absolute;
-  right: 0px;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #6e8cd7, 0 0 5px #6e8cd7;
-  opacity: 1.0;
-  -webkit-transform: rotate(3deg) translate(0px, -4px);
-  -moz-transform: rotate(3deg) translate(0px, -4px);
-  -ms-transform: rotate(3deg) translate(0px, -4px);
-  -o-transform: rotate(3deg) translate(0px, -4px);
-  transform: rotate(3deg) translate(0px, -4px);
-}
-
-.pace .pace-activity {
-  display: block;
-  position: fixed;
-  z-index: 2000;
-  top: 80px;
-  right: 30px;
-  width: 30px;
-  height: 30px;
-  border: solid 2px transparent;
-  border-top-color: #6e8cd7;
-  border-left-color: #6e8cd7;
-  border-radius: 50px;
-  -webkit-animation: pace-spinner 400ms linear infinite;
-  -moz-animation: pace-spinner 400ms linear infinite;
-  -ms-animation: pace-spinner 400ms linear infinite;
-  -o-animation: pace-spinner 400ms linear infinite;
-  animation: pace-spinner 400ms linear infinite;
-}
 .special-row{
 	height: 150px;
 }
