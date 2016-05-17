@@ -52,6 +52,7 @@ body {
   padding: 0px !important;
   margin: 0px !important;
   font-size: 14px;
+  overflow-x: hidden;
 }
 html {
   overflow-x: hidden;
