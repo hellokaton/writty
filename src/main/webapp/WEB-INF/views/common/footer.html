@@ -15,7 +15,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function($) {
     	
-    	$(document).pjax('a[target!=_blank][redirect!=true]', 'body', {fragment:'body', timeout:3000});
+    	$(document).pjax('.nav a[target!=_blank][redirect!=true]', 'body', {fragment:'body', timeout:3000});
 		    	
     	$(document).on('pjax:start', function() {
 	   	    NProgress.start();

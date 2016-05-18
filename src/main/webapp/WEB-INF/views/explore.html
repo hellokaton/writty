@@ -18,10 +18,10 @@
             		<a href="${base_url('/p/') + item.pid}">阅读全文</a>
             	</p>
             	<div class="read-meta m-t-50">
-            		<a href="">${item.publish_user}</a> <span class="text-">发布于 ${timespan(item.created)}</span>
+            		<a href="">${item.publish_user}</a> <span class="text-">发布于${timespan(item.created)}&nbsp;&nbsp;</span>
             		<a href="${base_url('/s/') + item.sid}"><span class="label label-inverse">${item.special}</span></a>
             		<div class="pull-right">
-            		${item.comments}个评论
+            		<i class="fa fa-comments-o"></i>&nbsp;&nbsp;${item.comments}个评论
             		</div>
             	</div>
             </div>
@@ -33,10 +33,10 @@
             		<a href="${base_url('/p/') + item.pid}">阅读全文</a>
             	</p>
             	<div class="read-meta m-t-20">
-            		<a href="">${item.publish_user}</a> <span class="text-">发布于 ${timespan(item.created)}</span>
+            		<a href="">${item.publish_user}</a> <span class="text-">发布于${timespan(item.created)}&nbsp;&nbsp;</span>
             		<a href="${base_url('/s/') + item.sid}"><span class="label label-inverse">${item.special}</span></a>
             		<div class="pull-right">
-            		${item.comments}个评论
+            		<i class="fa fa-comments-o"></i>&nbsp;&nbsp;${item.comments}个评论
             		</div>
             	</div>
             </div>

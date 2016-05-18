@@ -1,5 +1,6 @@
 #include("./common/header.html", {title:'文章详情'})
- <link href="${base}/assets/css/explore.css" rel="stylesheet" />
+<link href="${base}/assets/simplelightbox/css/simplelightbox.min.css" rel="stylesheet" />
+<link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
 	<div class="row">
@@ -48,5 +49,14 @@
 </div>
 <!-- END Wraper -->
 #include("./common/footer.html")
+<script src="${base}/assets/simplelightbox/js/simple-lightbox.min.js"></script>
+<script>
+	$(".entry-content img").each(function() {
+	    var a = $('<a/>').attr('href', $(this).attr('src')).attr('rel', 'lightbox');
+	    $(this).wrap(a);
+	});
+	
+	$('.entry-content a[rel=lightbox]').simpleLightbox();
+</script>
 </body>
 </html>

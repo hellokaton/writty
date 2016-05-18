@@ -50,7 +50,11 @@ html {
 
 .special-row .follow{
 	margin-right: -15px;
-	
+}
+
+.navbar-nav > li > a {
+    padding-bottom: 16px;
+    padding-top: 15px;
 }
 
 @-webkit-keyframes pace-spinner {
@@ -199,6 +203,12 @@ aside:not(.collapsed) .navigation ul li.active ul {
     
 header {
   background-color: #fff;
+  
+}
+
+.top-head{
+	-webkit-box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.08);
+    box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.08);
 }
 
 .navbar-toggle {
@@ -313,7 +323,7 @@ header {
 .top-menu li >a {
   color: #979898;
   text-align: center;
-  padding: 18px 15px;
+  padding: 17px 15px;
   font-size: 16px;
 }
 

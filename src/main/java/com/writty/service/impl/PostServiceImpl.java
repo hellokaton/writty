@@ -102,6 +102,7 @@ public class PostServiceImpl implements PostService {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pid", post.getPid());
+			map.put("sid", post.getSid());
 			map.put("title", post.getTitle());
 			map.put("comments", post.getComments());
 			if(StringKit.isNotBlank(post.getCover())){
@@ -113,7 +114,6 @@ public class PostServiceImpl implements PostService {
 			map.put("user_name", user.getUser_name());
 			map.put("publish_user", user.getNick_name());
 			map.put("user_avatar", user.getAvatar());
-			map.put("pid", post.getPid());
 			map.put("type", post.getType());
 			
 			Special special = specialService.getSpecial(post.getSid());
