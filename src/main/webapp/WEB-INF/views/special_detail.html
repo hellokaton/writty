@@ -1,11 +1,49 @@
 #include("./common/header.html", {active:'special', title:'专栏'})
  <link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
-<div class="container wraper container-fluid">
-	<div class="row">	
-		
-	</div>
-	<!-- End row -->
+<div class="container wraper container-fluid" style="max-width: 960px;">
+	#for(item : postPage.results)
+	<div class="panel panel-default">
+        <div class="panel-body"> 
+        	#if(null != item.cover && item.cover != '')
+        	<div class="col-md-5">
+            	<a href="${base_url('/p/') + item.pid}">
+            		<img class="br-radius" src="${item.cover}" width="320" height="200"/>
+            	</a>
+            </div>
+            <div class="col-md-7 summary-meta">
+            	<a href="${base_url('/p/') + item.pid}"><h3 class="text-blank">${item.title}</h3></a>
+            	<p class="txt">
+            		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
+            		<a href="${base_url('/p/') + item.pid}">阅读全文</a>
+            	</p>
+            	<div class="read-meta m-t-50">
+            		<a href="">${item.publish_user}</a> <span class="text-">发布于 ${timespan(item.created)}</span>
+            		<a href="${base_url('/s/') + item.sid}"><span class="label label-inverse">${item.special}</span></a>
+            		<div class="pull-right">
+            		${item.comments}个评论
+            		</div>
+            	</div>
+            </div>
+        	#else
+            <div class="col-md-12 summary-meta">
+            	<a href="${base_url('/p/') + item.pid}"><h3 class="text-blank">${item.title}</h3></a>
+            	<p class="txt">
+            		小伙伴们好！今天带来的摄影技巧干货，来自于几天前「乐高出柜计划」主页菌与「好奇星基地」共同举办的微信群分享，感谢「好奇星基地」
+            		<a href="${base_url('/p/') + item.pid}">阅读全文</a>
+            	</p>
+            	<div class="read-meta m-t-20">
+            		<a href="">${item.publish_user}</a> <span class="text-">发布于 ${timespan(item.created)}</span>
+            		<a href="${base_url('/s/') + item.sid}"><span class="label label-inverse">${item.special}</span></a>
+            		<div class="pull-right">
+            		${item.comments}个评论
+            		</div>
+            	</div>
+            </div>
+        	#end
+        </div> 
+    </div>
+	#end
 </div>
 <!-- END Wraper -->
 #include("./common/footer.html")

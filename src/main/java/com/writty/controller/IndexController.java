@@ -67,7 +67,7 @@ public class IndexController extends BaseController {
 	@Route(value = "/explore", method = HttpMethod.GET)
 	public ModelAndView show_explore(Request request, Response response){
 		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> postPage = postService.getPageListMap(null, page, 10);
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, page, 10);
 		request.attribute("postPage", postPage);
 		return this.getView("explore");
 	}
@@ -90,6 +90,13 @@ public class IndexController extends BaseController {
 	public ModelAndView showSpecialDetail(@PathVariable("id") Long id, Request request, Response response){
 		Map<String, Object> specialMap = specialService.getSpecialMap(null, id);
 		request.attribute("specialMap", specialMap);
+		
+		Integer page = request.queryAsInt("p");
+		
+		Page<Map<String, Object>> postPage = postService.getPageListMap(id, null, page, 10);
+		
+		request.attribute("postPage", postPage);
+		
 		return this.getView("special_detail");
 	}
 	

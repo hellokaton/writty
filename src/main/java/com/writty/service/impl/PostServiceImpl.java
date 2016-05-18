@@ -15,8 +15,10 @@ import com.blade.jdbc.QueryParam;
 import com.writty.kit.QiniuKit;
 import com.writty.kit.Utils;
 import com.writty.model.Post;
+import com.writty.model.Special;
 import com.writty.model.User;
 import com.writty.service.PostService;
+import com.writty.service.SpecialService;
 import com.writty.service.UserService;
 
 import blade.kit.DateKit;
@@ -29,13 +31,16 @@ public class PostServiceImpl implements PostService {
 	@Inject
 	private UserService userService;
 	
+	@Inject
+	private SpecialService specialService;
+	
 	@Override
 	public Post getPost(String pid) {
 		return AR.findById(Post.class, pid);
 	}
 	
 	@Override
-	public Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count) {
+	public Page<Map<String, Object>> getPageListMap(Long sid, String title, Integer page, Integer count) {
 		
 		if(null == page || page < 1){
 			page = 1;
@@ -45,6 +50,9 @@ public class PostServiceImpl implements PostService {
 		}
 		
 		QueryParam up = QueryParam.me();
+		if(null != sid){
+			up.eq("sid", sid);
+		}
 		if(StringKit.isNotBlank(title)){
 			up.like("title", "%"+title+"%");
 		}
@@ -96,7 +104,9 @@ public class PostServiceImpl implements PostService {
 			map.put("pid", post.getPid());
 			map.put("title", post.getTitle());
 			map.put("comments", post.getComments());
-			map.put("cover", QiniuKit.getUrl(post.getCover()));
+			if(StringKit.isNotBlank(post.getCover())){
+				map.put("cover", QiniuKit.getUrl(post.getCover()));
+			}
 			map.put("content", Utils.markdown2html(post.getContent()));
 			map.put("created", post.getCreated());
 			map.put("create_date", DateKit.formatDateByUnixTime(post.getCreated().longValue(), "yyyy-MM-dd"));
@@ -104,6 +114,13 @@ public class PostServiceImpl implements PostService {
 			map.put("publish_user", user.getNick_name());
 			map.put("user_avatar", user.getAvatar());
 			map.put("pid", post.getPid());
+			map.put("type", post.getType());
+			
+			Special special = specialService.getSpecial(post.getSid());
+			if(null != special){
+				map.put("special", special.getTitle());
+			}
+			
 			return map;
 		}
 		return null;

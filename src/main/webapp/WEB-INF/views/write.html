@@ -24,23 +24,23 @@
 				<textarea id="write_content" name="content" rows="100" cols="20" placeholder="写篇文章吧！"></textarea>
 				<div class="row m-t-10 m-b-10">
 					<label class="col-md-2 control-label">创作类型：</label>
-					<div class="col-md-10" style="margin-left: -110px;">
+					<div class="col-md-10" style="margin-left: -80px;">
 	                     <div class="radio-inline">
-	                         <label class="cr-styled" for="example-radio4">
+	                         <label class="cr-styled">
 	                             <input type="radio" name="type" value="1" checked="checked"/> 
 	                             <i class="fa"></i>
 	                             原创 
 	                         </label>
 	                     </div>
 	                     <div class="radio-inline">
-	                         <label class="cr-styled" for="example-radio5">
-	                             <input type="radio" id="example-radio5" name="type" value="2" /> 
+	                         <label class="cr-styled">
+	                             <input type="radio" name="type" value="2" /> 
 	                             <i class="fa"></i> 
 	                             转载
 	                         </label>
 	                     </div>
 	                     <div class="radio-inline">
-	                         <label class="cr-styled" for="example-radio6">
+	                         <label class="cr-styled" >
 	                             <input type="radio" name="type" value="3" /> 
 	                             <i class="fa"></i> 
 	                             翻译
@@ -124,7 +124,7 @@ function add_article(){
 		alertError("请输入标题");
 		return false;
 	}
-	if($('#add_article_form #title').val().length < 5 ｜｜ $('#add_article_form #title').val().length > 20){
+	if($('#add_article_form #title').val().length < 5 || $('#add_article_form #title').val().length > 20){
 		alertError("请输入5-20个字符以内的标题");
 		return false;
 	}
@@ -147,6 +147,7 @@ function add_article(){
 		if(response){
 			 if(response.status == 200){
 				 alertOk("文章发布成功，请等待审核！");
+				 window.location.href = BASE;
 			 } else {
 				 alertError(response.msg);
 			 }
@@ -154,7 +155,6 @@ function add_article(){
 	});
 	return false;
 }
-
 </script>
 </body>
 </html>

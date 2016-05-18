@@ -6,9 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -47,24 +45,6 @@ public class Utils {
 			ip = request.address();
 		}
 		return ip;
-	}
-	
-	/**
-	 * 获取@的用户列表
-	 * @param str
-	 * @return
-	 */
-	public static Set<String> getAtUsers(String str){
-		Set<String> users = new HashSet<String>();
-		if(StringKit.isNotBlank(str)){
-			Pattern pattern= Pattern.compile("\\@([a-zA-Z_0-9-]+)\\s");
-			Matcher matcher = pattern.matcher(str);
-			while(matcher.find()){
-				users.add(matcher.group(1));
-			}
-		}
-		
-		return users;
 	}
 	
 	public static boolean isEmail(String str){
@@ -205,10 +185,7 @@ public class Utils {
 			return content;
 		}
 		
-		String member = Funcs.base_url("/member/");
-		String content_ = content.replaceAll("@([a-zA-Z_0-9-]+)\\s", "<a href='"+ member +"$1'>@$1</a>&nbsp;");
-		
-		String processed = Processor.process(content_, config);
+		String processed = Processor.process(content, config);
 		
 		if(processed.indexOf("[mp3:") != -1){
 			processed = processed.replaceAll("\\[mp3:(\\d+)\\]", "<iframe frameborder='no' border='0' marginwidth='0' marginheight='0' width=330 height=86 src='http://music.163.com/outchain/player?type=2&id=$1&auto=0&height=66'></iframe>");
