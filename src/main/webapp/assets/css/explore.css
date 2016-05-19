@@ -3,6 +3,29 @@ body {
   color: #333;
 }
 
+.editormd-theme-dark {
+    border-color: #1a1a17;
+}
+
+.editormd-theme-dark .editormd-toolbar {
+    background: #1A1A17;
+    border-color: #1a1a17;
+}
+
+.editormd-theme-dark .editormd-menu > li > a {
+    color: #777;
+    border-color: #1a1a17;
+}
+
+.editormd-theme-dark .editormd-menu > li.divider {
+    border-right: 1px solid #111;
+}
+
+.editormd-theme-dark .editormd-menu > li > a:hover, .editormd-menu > li > a.active {
+    border-color: #333;
+    background: #333;
+}
+            
 .entry-mata{
 	
 }
