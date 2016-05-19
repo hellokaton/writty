@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public Page<Map<String, Object>> getPageListMap(Long sid, String title, Integer page, Integer count) {
+	public Page<Map<String, Object>> getPageListMap(Long uid, Long sid, String title, Integer page, Integer count) {
 		
 		if(null == page || page < 1){
 			page = 1;
@@ -50,6 +50,9 @@ public class PostServiceImpl implements PostService {
 		}
 		
 		QueryParam up = QueryParam.me();
+		if(null != uid){
+			up.eq("uid", uid);
+		}
 		if(null != sid){
 			up.eq("sid", sid);
 		}
@@ -100,13 +103,22 @@ public class PostServiceImpl implements PostService {
 				return null;
 			}
 			
+			Special special = specialService.getSpecial(post.getSid());
+			if(null == special){
+				return null;
+			}
+			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pid", post.getPid());
 			map.put("sid", post.getSid());
 			map.put("title", post.getTitle());
 			map.put("comments", post.getComments());
+			map.put("special", special.getTitle());
+			
 			if(StringKit.isNotBlank(post.getCover())){
 				map.put("cover", QiniuKit.getUrl(post.getCover()));
+			} else {
+				map.put("cover", QiniuKit.getUrl(special.getCover()));
 			}
 			map.put("content", Utils.markdown2html(post.getContent()));
 			map.put("created", post.getCreated());
@@ -116,10 +128,7 @@ public class PostServiceImpl implements PostService {
 			map.put("user_avatar", user.getAvatar());
 			map.put("type", post.getType());
 			
-			Special special = specialService.getSpecial(post.getSid());
-			if(null != special){
-				map.put("special", special.getTitle());
-			}
+			
 			
 			return map;
 		}

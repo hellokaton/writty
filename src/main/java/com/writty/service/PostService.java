@@ -11,7 +11,7 @@ public interface PostService {
 	
 	Map<String, Object> getPostDetail(Post post, String pid);
 	
-	Page<Map<String, Object>> getPageListMap(Long sid, String title, Integer page, Integer count);
+	Page<Map<String, Object>> getPageListMap(Long uid, Long sid, String title, Integer page, Integer count);
 	
 	boolean save(String title, String slug, Long uid, Long sid, Integer type, Integer is_pub, String cover, String content);
 	

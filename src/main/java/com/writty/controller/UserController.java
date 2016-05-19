@@ -42,6 +42,23 @@ public class UserController extends BaseController {
 	private FavoriteService favoriteService;
 	
 	/**
+	 * 我的文章列表
+	 */
+	@Route(value = "/articles", method = HttpMethod.GET)
+	public ModelAndView my_articles(Request request, Response response){
+		User user = SessionKit.getLoginUser();
+		if(null == user){
+			response.go("/");
+			return null;
+		}
+		
+		Integer page = request.queryAsInt("p");
+		Page<Map<String, Object>> postPage = postService.getPageListMap(user.getUid(), null, null, page, 20);
+		request.attribute("postPage", postPage);
+		return this.getView("articles");
+	}
+	
+	/**
 	 * 我的收藏
 	 */
 	@Route(value = "/favorites", method = HttpMethod.GET)

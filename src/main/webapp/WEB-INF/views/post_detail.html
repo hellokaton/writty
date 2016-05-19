@@ -1,4 +1,4 @@
-#include("./common/header.html", {title:'文章详情'})
+#include("./common/header.html", {title: postMap.title})
 <link rel="stylesheet" href="${cdn}/assets/highlight/styles/default.css" />
 <link rel="stylesheet" href="${cdn}/assets/highlight/styles/github.css" />
 <link href="${base}/assets/simplelightbox/css/simplelightbox.min.css" rel="stylesheet" />
@@ -35,6 +35,25 @@
 				</ul>
 			</div>
 			<hr />
+			#if(null != comments)
+				#for(item : comments)
+				<div class="media">
+			      <div class="media-left">
+			        <a href="${base_url('/u/') + item.user_name}">
+			          <img class="media-object img-circle profile-img" width="64" height="64" src="${cdn_url(item.avatar)}">
+			        </a>
+			      </div>
+			      <div class="media-body">
+			        <span class="media-heading">
+				        <a href="${base_url('/u/') + item.user_name}">${item.publish_user}</a>
+				        #if(null!=item.to_uid) 回复 <a href="${base_url('/u/') + item.to_user_name}">${item.to_user}</a>#end
+				    </span>
+			        <p>${item.content}</p>
+			      </div>
+			    </div>
+			    <hr />
+				#end
+			#end
 			#if(null != login_user)
 			<div class="entry-comments">
 				<div>
@@ -59,7 +78,6 @@
 	    var a = $('<a/>').attr('href', $(this).attr('src')).attr('rel', 'lightbox');
 	    $(this).wrap(a);
 	});
-	
 	$('.entry-content a[rel=lightbox]').simpleLightbox();
 </script>
 </body>

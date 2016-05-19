@@ -35,16 +35,15 @@ function random_specials(){
 			var data = response.specials;
 			for(i in data){
 				var item = data[i];
-				html += '<div class="col-sm-6 col-md-3">'+
-						'	<div class="portlet">'+
-						'		<a href="'+ BASE +'/s/' + item.id +'" style="color: white;">'+
-						'			<div class="panel special-row" style="background-image: url('+ item.cover +'); background-size: cover;">'+
-						'			</div>'+
+				html += '<div class="col-md-6">'+
+						'	 <article class="story item" id="story_${item.id}">'+
+					    '		<a href="'+ BASE +'/s/' + item.id +'">'+
+					    '  		<div class="image" style="background-image: url(${cdn_url('+ item.cover +')});">'+
+					    '    		<h3 class="text">'+ item.title + '</h3>'+
+					    '    		<div class="mask"></div>'+
+					    '  		</div>'+
 						'		</a>'+
-						'		<div style="height: 20px; line-height: 1px; margin-top: -10px; margin-bottom: 10px;">'+
-						'		<a href="'+ BASE +'/s/' + item.id +'"><h4>'+ item.title + '</h4></a>'+
-						'		</div>'+
-						'	</div>'+
+						'	</article>'+
 						'</div>';
 			}
 			$("div#specials").html(html);

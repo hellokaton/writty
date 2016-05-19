@@ -5,18 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.blade.ioc.annotation.Inject;
 import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.AR;
 import com.blade.jdbc.QueryParam;
 import com.writty.kit.Utils;
 import com.writty.model.Comment;
+import com.writty.model.User;
 import com.writty.service.CommentService;
+import com.writty.service.UserService;
 
 import blade.kit.DateKit;
 import blade.kit.StringKit;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+	
+	@Inject
+	private UserService userService;
 	
 	@Override
 	public Comment getComment(Integer id) {
@@ -55,10 +61,26 @@ public class CommentServiceImpl implements CommentService {
 	
 	private Map<String, Object> getCommentMap(Comment comment) {
 		if(null != comment){
+			User user = userService.getUser(comment.getUid());
+			if(null == user){
+				return null;
+			}
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("id", comment.getId());
+			map.put("avatar", user.getAvatar());
+			map.put("user_name", user.getUser_name());
 			map.put("publish_uid", comment.getUid());
-			map.put("to_uid", comment.getTo_uid());
+			map.put("publish_user", user.getNick_name());
+			
+			Long to_uid = comment.getTo_uid();
+			if(null != to_uid){
+				User toUser = userService.getUser(to_uid);
+				if(null != toUser){
+					map.put("to_user_name", toUser.getUser_name());
+					map.put("to_user", toUser.getNick_name());
+					map.put("to_uid", to_uid);
+				}
+			}
 			map.put("content", Utils.markdown2html(comment.getContent()));
 			return map;
 		}

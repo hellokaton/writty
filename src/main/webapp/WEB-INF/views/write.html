@@ -29,21 +29,21 @@
 	                         <label class="cr-styled">
 	                             <input type="radio" name="type" value="1" checked="checked"/> 
 	                             <i class="fa"></i>
-	                             原创 
+	                             	原创 
 	                         </label>
 	                     </div>
 	                     <div class="radio-inline">
 	                         <label class="cr-styled">
 	                             <input type="radio" name="type" value="2" /> 
 	                             <i class="fa"></i> 
-	                             转载
+	                             	转载
 	                         </label>
 	                     </div>
 	                     <div class="radio-inline">
 	                         <label class="cr-styled" >
 	                             <input type="radio" name="type" value="3" /> 
 	                             <i class="fa"></i> 
-	                             翻译
+	                            	翻译
 	                         </label>
 	                     </div>
 	                 </div>
@@ -81,9 +81,9 @@ var simplemde = new SimpleMDE({
 	},
 });
 // Select2
-   $(".select2").select2({
-       width: '100%'
-   });
+$(".select2").select2({
+    width: '100%'
+});
 $(".fileUpload").liteUploader({
     script: "${base_url('/uploadimg')}",
     params: {type:'avatar'},
@@ -124,10 +124,12 @@ function add_article(){
 		alertError("请输入标题");
 		return false;
 	}
+	
 	if($('#add_article_form #title').val().length < 5 || $('#add_article_form #title').val().length > 20){
 		alertError("请输入5-20个字符以内的标题");
 		return false;
 	}
+	
 	if(simplemde.value() == ''){
 		alertError("请输入文章内容");
 		return false;
@@ -137,6 +139,7 @@ function add_article(){
 		alertError("请输入100个字符以上的文章");
 		return false;
 	}
+	
 	if($('#add_article_form #sid').val() == ''){
 		alertError("请选择文章所属专栏");
 		return false;
@@ -147,7 +150,7 @@ function add_article(){
 		if(response){
 			 if(response.status == 200){
 				 alertOk("文章发布成功，请等待审核！");
-				 window.location.href = BASE;
+				 window.location.href = BASE + '/articles';
 			 } else {
 				 alertError(response.msg);
 			 }

@@ -14,15 +14,13 @@
 <script type="text/javascript" src="${cdn}/assets/nprogress/nprogress.min.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-		    	
-    	$(document).pjax('.nav a[target!=_blank][redirect!=true]', 'body', {fragment:'body', timeout:3000});
-		    	
+    	/* $(document).pjax('.nav a[target!=_blank][redirect!=true]', 'body', {fragment:'body', timeout:3000});
     	$(document).on('pjax:start', function() {
 	   	    NProgress.start();
 	   	});
 	   	$(document).on('pjax:end', function() {
 	   		NProgress.done();
-	   	});
+	   	}); */
 	   	
         //owl carousel
         $("#velonic-slider,#velonic-slider-2").owlCarousel({
