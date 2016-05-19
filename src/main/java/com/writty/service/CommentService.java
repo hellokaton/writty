@@ -1,24 +1,16 @@
 package com.writty.service;
 
 import java.util.List;
-
-import com.blade.jdbc.Page;
-import com.blade.jdbc.QueryParam;
+import java.util.Map;
 
 import com.writty.model.Comment;
 
 public interface CommentService {
 	
-	public Comment getComment(Integer id);
+	Comment getComment(Integer id);
 	
-	public Comment getComment(QueryParam where);
+	List<Map<String, Object>> getCommentListMap(String pid);
 	
-	public List<Comment> getCommentList(QueryParam where);
+	boolean save(String pid, Long cid, Long uid, Long to_uid, Long post_uid, String content, String ip);
 	
-	public Page<Comment> getPageList(QueryParam where);
-	
-	public boolean save( String pid, Integer cid, Integer uid, String nickName, String siteUrl, String email, String ip, Integer created );
-	
-	public boolean delete(Integer id);
-		
 }

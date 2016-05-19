@@ -15,6 +15,7 @@ import com.blade.web.http.Response;
 import com.writty.Constant;
 import com.writty.kit.SessionKit;
 import com.writty.model.User;
+import com.writty.service.CommentService;
 import com.writty.service.PostService;
 import com.writty.service.SpecialService;
 import com.writty.service.UserService;
@@ -32,6 +33,9 @@ public class IndexController extends BaseController {
 	
 	@Inject
 	private PostService postService;
+	
+	@Inject
+	private CommentService commentService;
 	
 	/**
 	 * 首页
@@ -105,8 +109,13 @@ public class IndexController extends BaseController {
 	 */
 	@Route(value = "/p/:pid", method = HttpMethod.GET)
 	public ModelAndView showArticle(@PathVariable("pid") String pid, Request request, Response response){
+		
 		Map<String, Object> postMap = postService.getPostDetail(null, pid);
 		request.attribute("postMap", postMap);
+		
+		List<Map<String, Object>> comments = commentService.getCommentListMap(pid);
+		request.attribute("comments", comments);
+		
 		return this.getView("post_detail");
 	}
 	

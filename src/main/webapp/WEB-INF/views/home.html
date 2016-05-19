@@ -2,7 +2,7 @@
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default text-center">
 				<div class="panel-body p-0">
 					<div class="velonic-carousel">
@@ -24,134 +24,135 @@
 					<!-- /.panel-body -->
 				</div>
 			</div>
+			
+			<div id="specials" class="row text-center">
+				#for(item : specials)
+				<div class="col-sm-6 col-md-4">
+					<div class="portlet">
+						<a href="${base_url('/s/') + item.id}" style="color: white;">
+							<div class="panel special-row" style="background-image: url('${cdn_url(item.cover)}'); background-size: cover;">
+							</div>
+						</a>
+						<div style="height: 20px; line-height: 1px; margin-top: -10px; margin-bottom: 10px;">
+							<a href="${base_url('/s/') + item.id}"><h4>${item.title}</h4></a>
+						</div>
+					</div>
+				</div>
+				#end
+			</div>
+			
+			<div class="row text-center m-t-10 m-b-10">
+				<button class="btn btn-inverse btn-custom m-b-5" onclick="random_specials();"> <i class="ion-loop"></i> <span>换一波</span> </button>
+			</div>
+			
+			<div class="row text-center m-b-10">
+				<h3>专栏编辑</h3>
+			</div>
+							
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel">
+						<div class="panel-body p-t-10">
+							<div class="media-main">
+								<a class="pull-left" href="#"> <img
+									class="thumb-lg img-circle bx-s"
+									src="${cdn}/assets/img/avatar.jpg" alt="">
+								</a>
+								<div class="info">
+									<h4>王爵</h4>
+									<p class="text-muted">Java开发者</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<hr />
+							<ul class="social-links list-inline p-b-10 text-center">
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="https://github.com/biezhi" data-original-title="Github"><i
+										class="fa fa-github"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
+										class="fa fa-twitter"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
+										class="fa fa-weibo"></i></a></li>
+							</ul>
+						</div>
+						<!-- panel-body -->
+					</div>
+					<!-- panel -->
+				</div>
+				<!-- end col -->
+		
+				<div class="col-sm-4">
+					<div class="panel">
+						<div class="panel-body p-t-10">
+							<div class="media-main">
+								<a class="pull-left" href="#"> <img
+									class="thumb-lg img-circle bx-s"
+									src="${cdn}/assets/img/img_1.jpg" alt="">
+								</a>
+								<div class="info">
+									<h4>文艺Rose</h4>
+									<p class="text-muted">网站设计师</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<hr />
+							<ul class="social-links list-inline p-b-10 text-center">
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="https://github.com/biezhi" data-original-title="Github"><i
+										class="fa fa-github"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
+										class="fa fa-twitter"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" target="_blank" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
+										class="fa fa-weibo"></i></a></li>
+							</ul>
+						</div>
+						<!-- panel-body -->
+					</div>
+					<!-- panel -->
+				</div>
+				<!-- end col -->
+		
+				<div class="col-sm-4">
+					<div class="panel">
+						<div class="panel-body p-t-10">
+							<div class="media-main">
+								<a class="pull-left" href="#"> <img
+									class="thumb-lg img-circle bx-s" src="${cdn}/assets/img/cp.png"
+									alt="">
+								</a>
+								<div class="info">
+									<h4>逗比产品汪</h4>
+									<p class="text-muted">你懂的...</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<hr />
+							<ul class="social-links list-inline p-b-10 text-center">
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" href="https://github.com/biezhi" data-original-title="Github"><i
+										class="fa fa-github"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
+										class="fa fa-twitter"></i></a></li>
+								<li><a title="" data-placement="top" data-toggle="tooltip"
+									class="tooltips" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
+										class="fa fa-weibo"></i></a></li>
+							</ul>
+						</div>
+						<!-- panel-body -->
+					</div>
+					<!-- panel -->
+				</div>
+				<!-- end col -->
+			</div>
+	
 		</div>
 	</div>
 	<!-- End row -->
-	
-	<div id="specials" class="row text-center">
-		#for(item : specials)
-		<div class="col-sm-6 col-md-3">
-			<div class="portlet">
-				<a href="${base_url('/s/') + item.id}" style="color: white;">
-					<div class="panel special-row" style="background-image: url('${cdn_url(item.cover)}'); background-size: cover;">
-					</div>
-				</a>
-				<div style="height: 20px; line-height: 1px; margin-top: -10px; margin-bottom: 10px;">
-					<a href="${base_url('/s/') + item.id}"><h4>${item.title}</h4></a>
-				</div>
-			</div>
-		</div>
-		#end
-	</div>
-	
-	<div class="row text-center m-t-10 m-b-10">
-		<button class="btn btn-inverse btn-custom m-b-5" onclick="random_specials();"> <i class="ion-loop"></i> <span>换一波</span> </button>
-	</div>
-
-	<div class="row text-center m-b-10">
-		<h3>专栏编辑</h3>
-	</div>
-	
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="panel">
-				<div class="panel-body p-t-10">
-					<div class="media-main">
-						<a class="pull-left" href="#"> <img
-							class="thumb-lg img-circle bx-s"
-							src="${cdn}/assets/img/avatar.jpg" alt="">
-						</a>
-						<div class="info">
-							<h4>王爵</h4>
-							<p class="text-muted">Java开发者</p>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<hr />
-					<ul class="social-links list-inline p-b-10 text-center">
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="https://github.com/biezhi" data-original-title="Github"><i
-								class="fa fa-github"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
-								class="fa fa-twitter"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
-								class="fa fa-weibo"></i></a></li>
-					</ul>
-				</div>
-				<!-- panel-body -->
-			</div>
-			<!-- panel -->
-		</div>
-		<!-- end col -->
-
-		<div class="col-sm-4">
-			<div class="panel">
-				<div class="panel-body p-t-10">
-					<div class="media-main">
-						<a class="pull-left" href="#"> <img
-							class="thumb-lg img-circle bx-s"
-							src="${cdn}/assets/img/img_1.jpg" alt="">
-						</a>
-						<div class="info">
-							<h4>文艺Rose</h4>
-							<p class="text-muted">网站设计师</p>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<hr />
-					<ul class="social-links list-inline p-b-10 text-center">
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="https://github.com/biezhi" data-original-title="Github"><i
-								class="fa fa-github"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
-								class="fa fa-twitter"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" target="_blank" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
-								class="fa fa-weibo"></i></a></li>
-					</ul>
-				</div>
-				<!-- panel-body -->
-			</div>
-			<!-- panel -->
-		</div>
-		<!-- end col -->
-
-		<div class="col-sm-4">
-			<div class="panel">
-				<div class="panel-body p-t-10">
-					<div class="media-main">
-						<a class="pull-left" href="#"> <img
-							class="thumb-lg img-circle bx-s" src="${cdn}/assets/img/cp.png"
-							alt="">
-						</a>
-						<div class="info">
-							<h4>逗比产品汪</h4>
-							<p class="text-muted">你懂的...</p>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<hr />
-					<ul class="social-links list-inline p-b-10 text-center">
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" href="https://github.com/biezhi" data-original-title="Github"><i
-								class="fa fa-github"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" href="https://twitter.com/biezhii" data-original-title="Twitter"><i
-								class="fa fa-twitter"></i></a></li>
-						<li><a title="" data-placement="top" data-toggle="tooltip"
-							class="tooltips" href="http://weibo.com/u/5238733773" data-original-title="Weibo"><i
-								class="fa fa-weibo"></i></a></li>
-					</ul>
-				</div>
-				<!-- panel-body -->
-			</div>
-			<!-- panel -->
-		</div>
-		<!-- end col -->
-	</div>
 </div>
 <!-- END Wraper -->
 #include("./common/footer.html")

@@ -13,8 +13,10 @@ import com.blade.web.http.HttpMethod;
 import com.blade.web.http.Request;
 import com.blade.web.http.Response;
 import com.writty.kit.SessionKit;
+import com.writty.kit.Utils;
 import com.writty.model.Special;
 import com.writty.model.User;
+import com.writty.service.CommentService;
 import com.writty.service.FavoriteService;
 import com.writty.service.PostService;
 import com.writty.service.SpecialService;
@@ -30,6 +32,9 @@ public class ArticleController extends BaseController {
 	
 	@Inject
 	private PostService postService;
+	
+	@Inject
+	private CommentService commentService;
 	
 	@Inject
 	private FavoriteService favoriteService;
@@ -101,6 +106,43 @@ public class ArticleController extends BaseController {
 			this.success(response, "");
 		} else {
 			this.error(response, "文章发布失败");
+		}
+	}
+	
+	/**
+	 * 发布评论
+	 */
+	@Route(value = "/comment", method = HttpMethod.POST)
+	public void save_comment(Request request, Response response){
+		User user = SessionKit.getLoginUser();
+		if(null == user){
+			this.nosignin(response);
+			return;
+		}
+		
+		String pid = request.query("pid");
+		String content = request.query("content");
+		Long post_uid = request.queryAsLong("post_uid");
+		Long cid = request.queryAsLong("cid");
+		Long to_uid = request.queryAsLong("to_uid");
+		
+		if(StringKit.isBlank(pid) || null == post_uid || StringKit.isBlank(content)){
+			this.error(response, "参数不能为空");
+			return;
+		}
+		
+		if(content.length() > 1000){
+			this.error(response, "请输入1000个字符以内的评论");
+			return;
+		}
+		
+		String ip = Utils.getIpAddr(request);
+		
+		boolean flag = commentService.save(pid, cid, user.getUid(), to_uid, post_uid, content, ip);
+		if(flag){
+			this.success(response, "");
+		} else {
+			this.error(response, "评论发布失败");
 		}
 	}
 	

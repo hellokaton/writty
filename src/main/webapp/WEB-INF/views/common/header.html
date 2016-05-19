@@ -28,59 +28,59 @@
       <script src="${cdn}/assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
-    <body>
-        <!--Main Content Start -->
-        <section class="content">
-            <!-- Header -->
-            <header class="top-head container-fluid">
-            	<div class="container ">
-            		<div class="navbar-header">
-			          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			            <span class="sr-only">Toggle navigation</span>
-			          </button>
-			          <a class="navbar-brand" href="${base_url('')}">Writty</a>
-			        </div>
-	                <!-- Left navbar -->
-	                <nav class=" navbar-default hidden-xs" role="navigation">
-	                    <ul class="nav navbar-nav">
-	                        <li><a href="${base_url('')}">首页</a></li>
-	                        <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}" data-remote="true">发现</a></li>
-	                        <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}" data-remote="true">专栏</a></li>
-	                        <li #if(active=='about')class="active"#end><a href="${base_url('/about')}" data-remote="true">关于</a></li>
-	                    </ul>
-	                </nav>
-	                
-	                <!-- Right navbar -->
-	                <ul class="list-inline navbar-right top-menu top-right-menu m-r-5">
-	                	<form role="search" class="navbar-left app-search pull-left m-l-10 hidden-xs ">
-		                  <input type="text" placeholder="搜索..." class="form-control">
-		                  <a href=""><i class="fa fa-search"></i></a>
-		                </form>
-	                	<li>
-	                	#if(null == login_user)
-	                	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success btn-sm">Github登录</button></li>
-	                	#else
-	                	<!-- user login dropdown start-->
-	                    <li class="dropdown text-center">
-	                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" redirect="true">
-	                            <img alt="" src="${cdn_url(login_user.avatar)}" class="img-circle profile-img thumb-sm">
-	                            <span class="username">${login_user.nick_name} </span> <span class="caret"></span>
-	                        </a>
-	                        <ul class="dropdown-menu extended pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
-	                        	#if(login_user.role_id < 2)
-	                        	<li><a href="${base_url('/admin')}" redirect="true"><i class="fa fa-dashboard"></i> 进入后台</a></li>
-	                        	#end
-	                        	#if(login_user.role_id < 4)
-	                        	<li><a href="${base_url('/write')}" redirect="true"><i class="fa fa-edit"></i> 写文章</a></li>
-	                        	#end
-	                            <li><a href="${base_url('/settings')}" redirect="true"><i class="fa fa-cog"></i> 设置</a></li>
-	                            <li><a href="${base_url('/logout')}" redirect="true"><i class="fa fa-sign-out"></i> 注销</a></li>
-	                        </ul>
-	                    </li>
-	                    <!-- user login dropdown end -->   
-	                	#end
-	                </ul>
-	                <!-- End right navbar -->
- 				</div>
-            </header>
-            <!-- Header Ends -->
+<body>
+    <!--Main Content Start -->
+    <section class="content">
+        <!-- Header -->
+        <header class="top-head container-fluid">
+        	<div class="container ">
+        		<div class="navbar-header">
+			         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			           <span class="sr-only">Toggle navigation</span>
+			         </button>
+			         <a class="navbar-brand" href="${base_url('')}">Writty</a>
+			 	</div>
+	             <!-- Left navbar -->
+	             <nav class="navbar-default hidden-xs" role="navigation">
+	                 <ul class="nav navbar-nav">
+	                     <li><a href="${base_url('')}">首页</a></li>
+	                     <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}" data-remote="true">发现</a></li>
+	                     <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}" data-remote="true">专栏</a></li>
+	                     <li #if(active=='about')class="active"#end><a href="${base_url('/about')}" data-remote="true">关于</a></li>
+	                 </ul>
+	             </nav>
+             
+	             <!-- Right navbar -->
+	             <ul class="list-inline navbar-right top-menu top-right-menu m-r-5">
+	             	<form role="search" class="navbar-left app-search pull-left m-l-10 hidden-xs ">
+	                <input type="text" placeholder="搜索..." class="form-control">
+	                <a href=""><i class="fa fa-search"></i></a>
+	              </form>
+	             	<li>
+	             	#if(null == login_user)
+	             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success btn-sm">Github登录</button></li>
+	             	#else
+	             	<!-- user login dropdown start-->
+	                 <li class="dropdown text-center">
+	                     <a data-toggle="dropdown" class="dropdown-toggle" href="#" redirect="true">
+	                         <img alt="" src="${cdn_url(login_user.avatar)}" class="img-circle profile-img thumb-sm">
+	                         <span class="username">${login_user.nick_name} </span> <span class="caret"></span>
+	                     </a>
+	                     <ul class="dropdown-menu extended pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
+	                     	#if(login_user.role_id < 2)
+	                     	<li><a href="${base_url('/admin')}" redirect="true"><i class="fa fa-dashboard"></i> 进入后台</a></li>
+	                     	#end
+	                     	#if(login_user.role_id < 4)
+	                     	<li><a href="${base_url('/write')}" redirect="true"><i class="fa fa-edit"></i> 写文章</a></li>
+	                     	#end
+	                         <li><a href="${base_url('/settings')}" redirect="true"><i class="fa fa-cog"></i> 设置</a></li>
+	                         <li><a href="${base_url('/logout')}" redirect="true"><i class="fa fa-sign-out"></i> 注销</a></li>
+	                     </ul>
+	                 </li>
+	                 <!-- user login dropdown end -->   
+	             	#end
+	             </ul>
+             	<!-- End right navbar -->
+			</div>
+        	</header>
+        	<!-- Header Ends -->
