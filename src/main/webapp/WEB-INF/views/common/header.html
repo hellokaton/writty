@@ -48,7 +48,6 @@
 		                 <ul class="nav navbar-nav">
 		                     <li><a href="${base_url('')}">首页</a></li>
 		                     <li #if(active=='explore')class="active"#end><a href="${base_url('/explore')}" data-remote="true">发现</a></li>
-		                     <li #if(active=='special')class="active"#end><a href="${base_url('/specials')}" data-remote="true">专栏</a></li>
 		                     <li #if(active=='about')class="active"#end><a href="${base_url('/about')}" data-remote="true">关于</a></li>
 		                 </ul>
 		             </nav>
@@ -61,7 +60,9 @@
 		              </form>
 		             	<li>
 		             	#if(null == login_user)
-		             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success btn-sm">Github登录</button></li>
+		             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success btn-sm">
+		             		<i class="ion-social-github"></i>
+		             		<span>Github登录</span></button></li>
 		             	#else
 		             	<!-- user login dropdown start-->
 		                 <li class="dropdown text-center">

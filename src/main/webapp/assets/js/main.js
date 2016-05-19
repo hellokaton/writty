@@ -51,20 +51,13 @@ function random_specials(){
 		if(response && response.specials){
 			var html = '';
 			var data = response.specials;
+			
 			for(i in data){
-				var item = data[i];
-				html += '<div class="col-md-6">'+
-						'	 <article class="story item" id="story_${item.id}">'+
-					    '		<a href="'+ BASE +'/s/' + item.id +'">'+
-					    '  		<div class="image" style="background-image: url('+ item.cover +');">'+
-					    '    		<h3 class="text">'+ item.title + '</h3>'+
-					    '    		<div class="mask"></div>'+
-					    '  		</div>'+
-						'		</a>'+
-						'	</article>'+
-						'</div>';
+				$('.specials figure:eq('+ i +')').find('img').attr('src', data[i].cover);
+				$('.specials figure:eq('+ i +')').find('h2').text(data[i].title);
+				$('.specials figure:eq('+ i +')').find('p').text(data[i].description);
+				$('.specials figure:eq('+ i +')').find('a').attr('href', BASE +'/s/' + data[i].id);
 			}
-			$("div#specials").html(html);
 		}
 	});
 }

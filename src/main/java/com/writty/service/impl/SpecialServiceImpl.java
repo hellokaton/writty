@@ -207,11 +207,11 @@ public class SpecialServiceImpl implements SpecialService {
 		
 		Integer max_sid = AR.find("select max(id) from t_special").first(Integer.class) + 1;
 		
-		int[] randoms = Utils.randomCommon(1000, max_sid, 6);
+		int[] randoms = Utils.randomCommon(1000, max_sid, 4);
 		
-		List<Special> specials = AR.find("select * from t_special where id in(?, ?, ?, ?, ?, ?)", 
+		List<Special> specials = AR.find("select * from t_special where id in(?, ?, ?, ?)", 
 				randoms[0], randoms[1], randoms[2], 
-				randoms[3], randoms[4], randoms[5] 
+				randoms[3]
 				).list(Special.class);
 		return this.getListMap(specials);
 	}

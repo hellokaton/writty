@@ -1,43 +1,50 @@
 #include("./common/header.html", {active:'home'})
+<link href="${base}/assets/css/set1.css" rel="stylesheet" />
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default text-center">
-				<div class="panel-body p-0">
-					<div class="velonic-carousel">
-						<div id="velonic-slider" class="owl-carousel">
-							<div class="item">
-								<h4>
-									<a href="#">Hey! 我们一起来写点干货</a>
-								</h4>
-								<p class="small">2016/05/10</p>
-								<p class="m-t-30">
-									<em>在这里可以分享你的技术，人生经验。我们用编程刻画了这个世界，也应该留下一些行走的轨迹给后来者，这样时代才会进步。</em>
-								</p>
-								<button class="btn btn-warning btn-sm m-t-40">阅读全部</button>
-							</div>
-							<!-- /.item -->
-						</div>
-						<!-- /#tiles-slide-1 -->
-					</div>
-					<!-- /.panel-body -->
+			<div class="row text-center specials">
+				<div class="grid">
+					<figure class="effect-bubba">
+						<a href="${base_url('/s/') + specials[0].id}">
+							<img src="${specials[0].cover}" alt=""/>
+							<figcaption>
+								<h2>${specials[0].title}</h2>
+								<p>${specials[0].description}</p>
+							</figcaption>
+						</a>			
+					</figure>
+					<figure class="effect-bubba">
+						<a href="${base_url('/s/') + specials[1].id}">
+							<img src="${specials[1].cover}" alt=""/>
+							<figcaption>
+								<h2>${specials[1].title}</h2>
+								<p>${specials[1].description}</p>
+							</figcaption>	
+						</a>		
+					</figure>
 				</div>
-			</div>
-			
-			<div id="specials" class="row text-center gallery">
-				#for(item : specials)
-				<div class="col-md-6">
-				  <article class="story item" id="story_${item.id}">
-				    <a href="${base_url('/s/') + item.id}">
-				      <div class="image" style="background-image: url(${item.cover});">
-				        <h3 class="text">${item.title}</h3>
-				        <div class="mask"></div>
-				      </div>
-					</a>
-					</article>
+				<div class="grid">
+					<figure class="effect-ruby">
+						<a href="${base_url('/s/') + specials[2].id}">
+							<img src="${specials[2].cover}" alt=""/>
+							<figcaption>
+								<h2>${specials[2].title}</h2>
+								<p>${specials[2].description}</p>
+							</figcaption>		
+						</a>	
+					</figure>
+					<figure class="effect-ruby">
+						<a href="${base_url('/s/') + specials[3].id}">
+							<img src="${specials[3].cover}" alt=""/>
+							<figcaption>
+								<h2>${specials[3].title}</h2>
+								<p>${specials[3].description}</p>
+							</figcaption>	
+						</a>		
+					</figure>
 				</div>
-				#end
 			</div>
 			
 			<div class="row text-center m-t-10 m-b-10">
