@@ -146,4 +146,35 @@ public class ArticleController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 收藏文章
+	 */
+	@Route(value = "/favorite", method = HttpMethod.POST)
+	public void favorite(Request request, Response response){
+		User user = SessionKit.getLoginUser();
+		if(null == user){
+			this.nosignin(response);
+			return;
+		}
+		
+		String pid = request.query("pid");
+		// 1收藏 0取消收藏
+		Integer type = request.queryAsInt("type");
+		if(null == type || StringKit.isBlank(pid)){
+			this.error(response, "收藏失败");
+			return;
+		}
+		boolean flag = false;
+		if(type==1){
+			flag = favoriteService.favorite(user.getUid(), pid);
+		} else{
+			flag = favoriteService.delete(user.getUid(), pid);
+		}
+		if(flag){
+			this.success(response, "");
+		} else {
+			this.error(response, "收藏失败");
+		}
+	}
+	
 }
