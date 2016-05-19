@@ -56,7 +56,7 @@ function random_specials(){
 				html += '<div class="col-md-6">'+
 						'	 <article class="story item" id="story_${item.id}">'+
 					    '		<a href="'+ BASE +'/s/' + item.id +'">'+
-					    '  		<div class="image" style="background-image: url(${cdn_url('+ item.cover +')});">'+
+					    '  		<div class="image" style="background-image: url('+ item.cover +');">'+
 					    '    		<h3 class="text">'+ item.title + '</h3>'+
 					    '    		<div class="mask"></div>'+
 					    '  		</div>'+
