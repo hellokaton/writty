@@ -1,4 +1,22 @@
 
+function go_signin(){
+	swal({
+		title:"提示信息", 
+		text:"您没有登录，3秒后跳转到登录页面！", 
+		type:"warning",
+		confirmButtonText:"点击跳转",
+		timer: 3000
+	},function(isConfirm){
+		if (isConfirm) {
+			setTimeout(function(){
+				window.location.href= BASE + '/signin';
+			}, 300);
+		} else{
+			window.location.href= BASE + '/signin';
+		}
+	});
+}
+
 function alertError(msg){
 	swal({
 		title:"提示信息", 

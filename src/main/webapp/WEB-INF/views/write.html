@@ -144,16 +144,18 @@ function add_article(){
 		alertError("请选择文章所属专栏");
 		return false;
 	}
-	
+		
 	var formData = $('#add_article_form').serialize();
-	$.post(BASE + '/write', formData, function(response){
-		if(response){
-			 if(response.status == 200){
-				 alertOk("文章发布成功，请等待审核！");
-				 window.location.href = BASE + '/articles';
-			 } else {
-				 alertError(response.msg);
-			 }
+	$.post(BASE + '/write', formData, function(response) {
+		if (response) {
+			if (response.status == 200) {
+				alertOk("文章发布成功，请等待审核！");
+				window.location.href = BASE + '/articles';
+			} else if (response.status == 401) {
+				go_signin();
+			} else {
+				alertError(response.msg);
+			}
 		}
 	});
 	return false;

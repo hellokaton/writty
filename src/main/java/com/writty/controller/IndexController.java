@@ -82,7 +82,7 @@ public class IndexController extends BaseController {
 	@Route(value = "/specials", method = HttpMethod.GET)
 	public ModelAndView show_specials(Request request, Response response){
 		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> specialPage = specialService.getPageListMap(null, page, 8);
+		Page<Map<String, Object>> specialPage = specialService.getPageListMap(null, page, 6);
 		request.attribute("specialPage", specialPage);
 		return this.getView("specials");
 	}
