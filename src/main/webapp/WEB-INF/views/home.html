@@ -1,4 +1,4 @@
-#include("./common/header.html", {active:'home', title:'Writty'})
+#include("./common/header.html", {active:'home'})
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
 	<div class="row">
@@ -25,18 +25,17 @@
 				</div>
 			</div>
 			
-			<div id="specials" class="row text-center">
+			<div id="specials" class="row text-center gallery">
 				#for(item : specials)
-				<div class="col-sm-6 col-md-4">
-					<div class="portlet">
-						<a href="${base_url('/s/') + item.id}" style="color: white;">
-							<div class="panel special-row" style="background-image: url('${cdn_url(item.cover)}'); background-size: cover;">
-							</div>
-						</a>
-						<div style="height: 20px; line-height: 1px; margin-top: -10px; margin-bottom: 10px;">
-							<a href="${base_url('/s/') + item.id}"><h4>${item.title}</h4></a>
-						</div>
-					</div>
+				<div class="col-md-6">
+				  <article class="story item" id="story_${item.id}">
+				    <a href="${base_url('/s/') + item.id}">
+				      <div class="image" style="background-image: url(${cdn_url(item.cover)});">
+				        <h3 class="text">${item.title}</h3>
+				        <div class="mask"></div>
+				      </div>
+					</a>
+					</article>
 				</div>
 				#end
 			</div>

@@ -1,4 +1,6 @@
 #include("./common/header.html", {title:'文章详情'})
+<link rel="stylesheet" href="${cdn}/assets/highlight/styles/default.css" />
+<link rel="stylesheet" href="${cdn}/assets/highlight/styles/github.css" />
 <link href="${base}/assets/simplelightbox/css/simplelightbox.min.css" rel="stylesheet" />
 <link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
@@ -49,6 +51,8 @@
 </div>
 <!-- END Wraper -->
 #include("./common/footer.html")
+<script src="${cdn}/assets/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="${base}/assets/simplelightbox/js/simple-lightbox.min.js"></script>
 <script>
 	$(".entry-content img").each(function() {
