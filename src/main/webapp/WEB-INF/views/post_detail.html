@@ -4,81 +4,81 @@
 <link href="${base}/assets/simplelightbox/css/simplelightbox.min.css" rel="stylesheet" />
 <link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
-<div class="container wraper container-fluid">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<div class="row">
-				<h1>${postMap.title}</h1>
-			</div>
-			<hr/>
-			<div class="row entry-mata" style="height: 30px;">
-				<p class="pull-left">
-					<a href="#"><img src="${postMap.user_avatar}" class="img-circle profile-img thumb-sm"/>
-					<b>${postMap.publish_user}</b></a> 发布于 ${timespan(postMap.created)}
-				</p>
-				<p class="pull-right">
-					<a href="${base_url('/s/') + postMap.sid}"><span class="label label-inverse">${postMap.special}</span></a>
-				</p>
-			</div>
-			<hr/>
-			<div class="entry-content">
-				${postMap.content}
-			</div>
-			<hr />
-			<div class="entry-footer m-l-10">
-				<ul class="social-links list-inline">
-					分享到：
-					<li>
-						<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Weibo">
-							<i class="fa fa-weibo"></i></a>
-					</li>
-				</ul>
-			</div>
-			<hr />
-			<div id="comment-body">
-			#if(null != comments)
-				#for(item : comments)
-				<div class="media">
-					<div class="media-left">
-						<a href="https://github.com/${item.user_name}">
-							<img class="media-object img-circle profile-img" width="64"
-							height="64" src="${cdn_url(item.avatar)}">
-						</a>
-					</div>
-					<div class="media-right">
-						<span>${timespan(item.created)}</span>
-					</div>
-					<div class="media-body">
-						<span class="media-heading"> <a
-							href="https://github.com/${item.user_name}">${item.publish_user}</a>
-							#if(null!=item.to_uid) 回复 <a
-							href="https://github.com/${item.to_user_name}">${item.to_user}</a>#end
-						</span>
-						<p>${item.content}</p>
-					</div>
-				</div>
-				<hr />
-				#end
-			#end
-			</div>
-			#if(null != login_user)
-			<div class="entry-comments">
-				<form id="comment_form" method="post" onsubmit="return add_comment();">
-					<input type="hidden" name="pid" value="${postMap.pid}"/>
-					<input type="hidden" name="cid" value=""/>
-					<input type="hidden" name="to_uid" value=""/>
-					<input type="hidden" name="post_uid" value="${postMap.uid}"/>
-					<div>
-						<textarea name="content" required="required" class="form-control" rows="3" 
-							placeholder="请输入评论..." style="max-width: 100%; max-height: 150px;" ></textarea>
-					</div>
-					<div class="pull-right m-t-10">
-						<button type="submit" class="btn btn-primary btn-rounded m-b-5">发表评论</button>
-					</div>
-				</form>
-			</div>
-			#end
+<div class="container wraper container-fluid post-detail">
+	<div class="row " style="box-shadow: 0 1px 35px 0 rgba(0, 0, 0, 0.3);">
+		<div class="row">
+			<h1>${postMap.title}</h1>
 		</div>
+		<hr/>
+		<div class="row entry-mata" style="height: 30px;">
+			<p class="pull-left">
+				<a href="#"><img src="${postMap.user_avatar}" class="img-circle profile-img thumb-sm"/>
+				<b>${postMap.publish_user}</b></a> 发布于 ${timespan(postMap.created)}
+			</p>
+			<p class="pull-right">
+				<a href="${base_url('/s/') + postMap.sid}"><span class="label label-inverse">${postMap.special}</span></a>
+			</p>
+		</div>
+		<hr/>
+		<div class="entry-content">
+			${postMap.content}
+		</div>
+		<hr />
+		<div class="entry-footer m-l-10">
+			<ul class="social-links list-inline">
+				分享到：
+				<li>
+					<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="#" data-original-title="Weibo">
+						<i class="fa fa-weibo"></i></a>
+				</li>
+			</ul>
+		</div>
+		<hr />
+		<div id="comment-body">
+		#if(null != comments)
+			#for(item : comments)
+			<div class="media">
+				<div class="media-left">
+					<a href="https://github.com/${item.user_name}">
+						<img class="media-object img-circle" width="50"
+						height="50" src="${cdn_url(item.avatar)}" />
+					</a>
+				</div>
+				
+				<div class="media-body">
+					<span class="media-heading text-muted">
+						<a href="https://github.com/${item.user_name}">${item.publish_user}</a>
+						#if(null!=item.to_uid) 回复 <a
+						href="https://github.com/${item.to_user_name}">${item.to_user}</a>#end
+					</span>
+					<p>${item.content}</p>
+				</div>
+				<div class="pull-right" style="margin-top: -70px;">
+					<small class="text-muted">${timespan(item.created)}</small>
+				</div>
+				
+			</div>
+			<hr />
+			#end
+		#end
+		</div>
+		#if(null != login_user)
+		<div class="entry-comments">
+			<form id="comment_form" method="post" onsubmit="return add_comment();">
+				<input type="hidden" name="pid" value="${postMap.pid}"/>
+				<input type="hidden" name="cid" value=""/>
+				<input type="hidden" name="to_uid" value=""/>
+				<input type="hidden" name="post_uid" value="${postMap.uid}"/>
+				<div>
+					<textarea name="content" required="required" class="form-control" rows="3" 
+						placeholder="请输入评论..." style="max-width: 100%; max-height: 150px;" ></textarea>
+				</div>
+				<div class="pull-right m-t-10">
+					<button type="submit" class="btn btn-primary btn-rounded m-b-5">发表评论</button>
+				</div>
+			</form>
+		</div>
+		#end
 	</div>
 	<!-- End row -->
 </div>

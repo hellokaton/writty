@@ -8,7 +8,8 @@ html {
 }
 
 body {
-  background-color: #fff;
+  /*background-color:#fff;*/
+  background-color:rgb(73, 74, 95);
   padding: 0px !important;
   margin: 0px !important;
   overflow-x: hidden;
@@ -16,10 +17,11 @@ body {
   /* font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif; */
   font-size: 16px;
   color: #404040;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .nav > li > a{
-	font-size: 14px;
 	color: #3d444f;
 }
 
@@ -414,7 +416,7 @@ header {
 }
 
 .wraper {
-  padding-top: 20px;
+  padding-top: 10px;
   min-height: 550px;
   padding-bottom: 70px;
 }

@@ -47,17 +47,26 @@ function len(o){
 
 // 随机专栏
 function random_specials(){
+	$('.specials').waitMe({
+		effect : 'stretch',
+		text : '',
+		bg : 'rgba(255,255,255,0.7)',
+		color : '#000',
+		maxSize : '',
+		source : ''
+	});
 	$.get(BASE + '/api/specials/random', {}, function(response){
 		if(response && response.specials){
 			var html = '';
 			var data = response.specials;
-			
 			for(i in data){
 				$('.specials figure:eq('+ i +')').find('img').attr('src', data[i].cover);
 				$('.specials figure:eq('+ i +')').find('h2').text(data[i].title);
 				$('.specials figure:eq('+ i +')').find('p').text(data[i].description);
 				$('.specials figure:eq('+ i +')').find('a').attr('href', BASE +'/s/' + data[i].id);
 			}
+			$('.specials').waitMe('hide');
 		}
 	});
 }
+

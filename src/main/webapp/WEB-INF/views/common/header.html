@@ -19,6 +19,7 @@
     <link href="${cdn}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="${cdn}/assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
 	<link href="${cdn}/assets/sweet-alert/sweetalert.min.css" type="text/css" rel="stylesheet" />
+	<link href="${base}/assets/waitMe/waitMe.min.css" type="text/css" rel="stylesheet" />
 	
     <!-- Custom styles for this template -->
     <link href="${base}/assets/css/home.css?ver=${version}" rel="stylesheet">
@@ -60,7 +61,7 @@
 		              </form>
 		             	<li>
 		             	#if(null == login_user)
-		             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success btn-sm">
+		             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success">
 		             		<i class="ion-social-github"></i>
 		             		<span>Github登录</span></button></li>
 		             	#else
