@@ -41,6 +41,8 @@ public class Post implements Serializable {
 	//文章发布状态
 	private Integer is_pub;
 	
+	private Integer is_del;
+	
 	//文章发布时间
 	private Integer created;
 	
@@ -143,6 +145,14 @@ public class Post implements Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public Integer getIs_del() {
+		return is_del;
+	}
+
+	public void setIs_del(Integer is_del) {
+		this.is_del = is_del;
 	}
 	
 }

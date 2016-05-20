@@ -32,6 +32,8 @@ public class Special implements Serializable {
 	//关注数
 	private Integer follow_count;
 	
+	private Integer is_del;
+	
 	//分类创建时间
 	private Integer created;
 	
@@ -99,6 +101,14 @@ public class Special implements Serializable {
 
 	public void setCreated(Integer created) {
 		this.created = created;
+	}
+
+	public Integer getIs_del() {
+		return is_del;
+	}
+
+	public void setIs_del(Integer is_del) {
+		this.is_del = is_del;
 	}
 	
 }

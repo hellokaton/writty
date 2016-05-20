@@ -36,19 +36,26 @@ public class SpecialServiceImpl implements SpecialService {
 	}
 	
 	@Override
-	public Page<Map<String, Object>> getPageListMap(String title, Integer page, Integer count) {
+	public Page<Map<String, Object>> getPageListMap(String title, Integer is_pub, Integer page, Integer count, String orderby) {
+		if(null == page || page < 1){
+			page = 1;
+		}
+		if(null == count || count < 1){
+			count = 10;
+		}
+		
 		QueryParam up = QueryParam.me();
 		if(StringKit.isNotBlank(title)){
 			up.like("title", "%"+title+"%");
 		}
-		if(null == page || page < 1){
-			page = 1;
+		if(null == orderby){
+			orderby = "id desc";
 		}
-		
-		if(null == count || count < 1){
-			count = 10;
+		if(null != is_pub){
+			up.eq("is_pub", is_pub);
 		}
-		up.orderby("id desc").page(page, count);
+		up.eq("is_del", 0);
+		up.orderby(orderby).page(page, count);
 		Page<Special> pageSpecial = AR.find(up).page(Special.class);
 		return this.getPageListMap(pageSpecial);
 	}
@@ -112,9 +119,9 @@ public class SpecialServiceImpl implements SpecialService {
 	}
 	
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(Long id) {
 		if(null != id){
-			AR.update("delete from ").executeUpdate();
+			AR.update("update t_special set is_del = 1 where id = ?", id).executeUpdate(true);
 			return true;
 		}
 		return false;

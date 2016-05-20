@@ -66,7 +66,7 @@ public class OAuthController extends BaseController {
 					"client_secret" , Constant.GITHUB_CLIENT_SECRET,
 					"code", code)
 					.accept("application/json")
-					.readTimeout(5000)
+					.readTimeout(10 * 1000)
 					.trustAllCerts().trustAllHosts().body();
 			
 			LOGGER.info("body = {}", body);

@@ -113,4 +113,12 @@ public class FavoriteServiceImpl implements FavoriteService {
 		}
 		return null;
 	}
+
+	@Override
+	public Long getFavoriteCount(String pid) {
+		if(StringKit.isBlank(pid)){
+			return 0L;
+		}
+		return AR.find("select count(1) from t_favorite where pid = ?", pid).first(Long.class);
+	}
 }

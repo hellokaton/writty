@@ -40,16 +40,19 @@
 				#for(item : comments)
 				<div class="media">
 					<div class="media-left">
-						<a href="${base_url('/u/') + item.user_name}"> <img
-							class="media-object img-circle profile-img" width="64"
+						<a href="https://github.com/${item.user_name}">
+							<img class="media-object img-circle profile-img" width="64"
 							height="64" src="${cdn_url(item.avatar)}">
 						</a>
 					</div>
+					<div class="media-right">
+						<span>${timespan(item.created)}</span>
+					</div>
 					<div class="media-body">
 						<span class="media-heading"> <a
-							href="${base_url('/u/') + item.user_name}">${item.publish_user}</a>
+							href="https://github.com/${item.user_name}">${item.publish_user}</a>
 							#if(null!=item.to_uid) 回复 <a
-							href="${base_url('/u/') + item.to_user_name}">${item.to_user}</a>#end
+							href="https://github.com/${item.to_user_name}">${item.to_user}</a>#end
 						</span>
 						<p>${item.content}</p>
 					</div>
@@ -61,10 +64,10 @@
 			#if(null != login_user)
 			<div class="entry-comments">
 				<form id="comment_form" method="post" onsubmit="return add_comment();">
-					<input type="text" name="pid" value="${postMap.pid}"/>
-					<input type="text" name="cid" value=""/>
-					<input type="text" name="to_uid" value=""/>
-					<input type="text" name="post_uid" value="${postMap.uid}"/>
+					<input type="hidden" name="pid" value="${postMap.pid}"/>
+					<input type="hidden" name="cid" value=""/>
+					<input type="hidden" name="to_uid" value=""/>
+					<input type="hidden" name="post_uid" value="${postMap.uid}"/>
 					<div>
 						<textarea name="content" required="required" class="form-control" rows="3" 
 							placeholder="请输入评论..." style="max-width: 100%; max-height: 150px;" ></textarea>

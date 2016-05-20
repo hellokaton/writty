@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public boolean save(String pid, Long cid, Long uid, Long to_uid, Long post_uid, String content, String ip) {
 		try {
-			AR.update("insert into t_comment(pid, cid, uid, to_uid, content, ip, created) values(?, ?, ?, ?, ?, ?)",
+			AR.update("insert into t_comment(pid, cid, uid, to_uid, content, ip, created) values(?, ?, ?, ?, ?, ?, ?)",
 					pid, cid, uid, to_uid, content, ip, DateKit.getCurrentUnixTime()).executeUpdate();
 			
 			// 通知文章发布人
@@ -70,6 +70,7 @@ public class CommentServiceImpl implements CommentService {
 			map.put("avatar", user.getAvatar());
 			map.put("user_name", user.getUser_name());
 			map.put("publish_uid", comment.getUid());
+			map.put("created", comment.getCreated());
 			map.put("publish_user", user.getNick_name());
 			
 			Long to_uid = comment.getTo_uid();

@@ -42,8 +42,9 @@ public class SpecialsController extends BaseController {
 			request.attribute("title", title);
 		}
 		
-		Page<Map<String, Object>> specialPage = specialService.getPageListMap(title, page, 15);
+		Page<Map<String, Object>> specialPage = specialService.getPageListMap(title, null, page, 15, "post_count asc");
 		request.attribute("specialPage", specialPage);
+		request.attribute("title", title);
 		
 		return this.getAdminView("specials");
 	}
@@ -147,5 +148,18 @@ public class SpecialsController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 删除专栏
+	 */
+	@Route(value = "/specials/delete", method = HttpMethod.POST)
+	public void delete_pecial(Request request, Response response){
+		Long id = request.queryAsLong("id");
+		boolean flag = specialService.delete(id);
+		if(flag){
+			this.success(response, "");
+		} else {
+			this.error(response, "专栏修改失败");
+		}
+	}
 	
 }

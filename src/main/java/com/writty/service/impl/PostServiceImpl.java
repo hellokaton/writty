@@ -17,6 +17,7 @@ import com.writty.kit.Utils;
 import com.writty.model.Post;
 import com.writty.model.Special;
 import com.writty.model.User;
+import com.writty.service.FavoriteService;
 import com.writty.service.PostService;
 import com.writty.service.SpecialService;
 import com.writty.service.UserService;
@@ -34,13 +35,16 @@ public class PostServiceImpl implements PostService {
 	@Inject
 	private SpecialService specialService;
 	
+	@Inject
+	private FavoriteService favoriteService;
+	
 	@Override
 	public Post getPost(String pid) {
 		return AR.findById(Post.class, pid);
 	}
 	
 	@Override
-	public Page<Map<String, Object>> getPageListMap(Long uid, Long sid, String title, Integer page, Integer count) {
+	public Page<Map<String, Object>> getPageListMap(Long uid, Long sid, Integer is_pub, String title, Integer page, Integer count) {
 		
 		if(null == page || page < 1){
 			page = 1;
@@ -56,9 +60,13 @@ public class PostServiceImpl implements PostService {
 		if(null != sid){
 			up.eq("sid", sid);
 		}
+		if(null != is_pub){
+			up.eq("is_pub", is_pub);
+		}
 		if(StringKit.isNotBlank(title)){
 			up.like("title", "%"+title+"%");
 		}
+		up.eq("is_del", 0);
 		up.orderby("created desc").page(page, count);
 		Page<Post> postPage = AR.find(up).page(Post.class);
 		return this.getPageListMap(postPage);
@@ -111,6 +119,7 @@ public class PostServiceImpl implements PostService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pid", post.getPid());
 			map.put("sid", post.getSid());
+			map.put("uid", post.getUid());
 			map.put("title", post.getTitle());
 			map.put("comments", post.getComments());
 			map.put("special", special.getTitle());
@@ -127,8 +136,10 @@ public class PostServiceImpl implements PostService {
 			map.put("publish_user", user.getNick_name());
 			map.put("user_avatar", user.getAvatar());
 			map.put("type", post.getType());
+			map.put("is_pub", post.getIs_pub());
 			
-			
+			Long favorites = favoriteService.getFavoriteCount(post.getPid());
+			map.put("favorites", favorites);
 			
 			return map;
 		}
@@ -172,10 +183,19 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public boolean delete(String pid) {
 		if(null != pid){
-			AR.update("delete from ").executeUpdate();
+			AR.update("update t_post set is_del = 1 where pid = ?", pid).executeUpdate(true);
 			return true;
 		}
 		return false;
 	}
-		
+	
+	@Override
+	public boolean audit(String pid) {
+		if(null != pid){
+			AR.update("update t_post set is_pub = 1 where pid = ?", pid).executeUpdate();
+			return true;
+		}
+		return false;
+	}
+	
 }

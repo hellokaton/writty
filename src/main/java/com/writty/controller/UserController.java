@@ -53,7 +53,7 @@ public class UserController extends BaseController {
 		}
 		
 		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> postPage = postService.getPageListMap(user.getUid(), null, null, page, 20);
+		Page<Map<String, Object>> postPage = postService.getPageListMap(user.getUid(), null, null, null, page, 20);
 		request.attribute("postPage", postPage);
 		return this.getView("articles");
 	}

@@ -10,6 +10,8 @@ public interface FavoriteService {
 	
 	boolean delete(Long uid, String  pid);
 	
+	Long getFavoriteCount(String pid);
+	
 	Page<Map<String, Object>> getMyFavorites(Long uid, Integer page, Integer count);
 	
 }
