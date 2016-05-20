@@ -71,7 +71,8 @@ public class IndexController extends BaseController {
 	@Route(value = "/explore", method = HttpMethod.GET)
 	public ModelAndView show_explore(Request request, Response response){
 		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, null, null, page, 10);
+		String title = request.query("title");
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, null, title, page, 10);
 		request.attribute("postPage", postPage);
 		return this.getView("explore");
 	}

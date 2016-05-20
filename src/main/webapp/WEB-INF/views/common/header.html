@@ -31,7 +31,7 @@
       <script src="${cdn}/assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body #if(null!=body_color)style="background-color: ${body_color};"#end>
     <!--Main Content Start -->
     <section class="content">
         <!-- Header -->
@@ -55,10 +55,10 @@
 	             
 		             <!-- Right navbar -->
 		             <ul class="list-inline navbar-right top-menu top-right-menu m-r-5">
-		             	<form role="search" class="navbar-left app-search pull-left m-l-10 hidden-xs ">
-		                <input type="text" placeholder="搜索..." class="form-control">
-		                <a href=""><i class="fa fa-search"></i></a>
-		              </form>
+		             	<form role="search" class="navbar-left app-search pull-left m-l-10 hidden-xs" action="${base_url('/explore')}">
+			                <input type="text" placeholder="搜索..." class="form-control" name="title"/>
+			                <a href=""><i class="fa fa-search"></i></a>
+			            </form>
 		             	<li>
 		             	#if(null == login_user)
 		             	<button type="button" onclick="javascript:window.location.href='${base_url('/github')}';" class="btn btn-success">
