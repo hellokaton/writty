@@ -2,7 +2,7 @@
  <link href="${base}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
 <div class="container wraper container-fluid">
-	<div class="row m-t-10">
+	<div class="row">
 		#for(item : postPage.results)
 		<div class='column col-md-4'>
 		    <div class='post-module hover'>
@@ -13,7 +13,8 @@
 		        <div class='category'><a href="${base_url('/s/') + item.sid}" style="color: white;">${item.special}</a></div>
 		        <a href="${base_url('/p/') + item.pid}"><h1 class='title'>${item.title}</h1></a>
 		        <p class='description'>
-		        	童话中丰富的想象和夸张可以活跃你的思维；那生动的形象、美妙的故事可以帮你认识社会、理解人生，非的人。</p>
+		        	${str_count(item.content, 30)}
+		        </p>
 		        <div class='post-meta'>
 		          	<span class='timestamp'>
 			            <i class='fa fa-clock-o'></i>

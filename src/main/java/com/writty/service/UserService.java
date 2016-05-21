@@ -19,7 +19,7 @@ public interface UserService {
 
 	User signin(String userName, String passWord);
 
-	User saveGithubUser(String login, String name, String avatar_url, Long open_id);
+	User saveGithubUser(String login, String name, String email, String avatar_url, Long open_id);
 
 	boolean updateRole(Long uid, Integer role_id);
 

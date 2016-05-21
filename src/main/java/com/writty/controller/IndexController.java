@@ -72,7 +72,7 @@ public class IndexController extends BaseController {
 	public ModelAndView show_explore(Request request, Response response){
 		Integer page = request.queryAsInt("p");
 		String title = request.query("title");
-		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, null, title, page, 10);
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, 1, title, page, 10, null);
 		request.attribute("postPage", postPage);
 		return this.getView("explore");
 	}
@@ -98,7 +98,7 @@ public class IndexController extends BaseController {
 		
 		Integer page = request.queryAsInt("p");
 		
-		Page<Map<String, Object>> postPage = postService.getPageListMap(null, id, null, null, page, 10);
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, id, 1, null, page, 10, null);
 		
 		request.attribute("postPage", postPage);
 		

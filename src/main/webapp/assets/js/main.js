@@ -26,13 +26,13 @@ function alertError(msg){
 	});
 }
 
-function alertOk(msg){
+function alertOk(msg, callback){
 	swal({
 		title:"提示信息", 
 		text: msg, 
 		type:"success",
 		timer: 3000
-	});
+	}, callback);
 }
 
 function len(o){  
@@ -50,7 +50,7 @@ function random_specials(){
 	$('.specials').waitMe({
 		effect : 'stretch',
 		text : '',
-		bg : 'rgba(255,255,255,0.7)',
+		//bg : 'rgb(73,74,95)',
 		color : '#000',
 		maxSize : '',
 		source : ''
@@ -70,3 +70,22 @@ function random_specials(){
 	});
 }
 
+var user = {};
+//修改密码
+user.update_pwd = function(){
+	var formData = $('#pwd_form').serialize();
+	$.post(BASE + '/reset_pwd', formData, function(response){
+		if(response){
+			if(response.status == 200){
+				alertOk("密码修改成功!", function(){
+					window.location.reload();
+				});	
+			} else if(response.status == 401){
+				go_signin();
+			} else{
+				alertError(response.msg);
+			}
+		}
+	});
+	return false;
+}

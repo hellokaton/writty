@@ -43,7 +43,7 @@ public class IndexController extends BaseController {
 		Integer is_pub = StringKit.equals(is_pub_str, "on") ? 0 : null;
 		Integer page = request.queryAsInt("p");
 		
-		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, is_pub, title, page, 15);
+		Page<Map<String, Object>> postPage = postService.getPageListMap(null, null, is_pub, title, page, 15, "is_pub asc, created desc");
 		request.attribute("postPage", postPage);
 		request.attribute("title", title);
 		request.attribute("is_pub", is_pub);

@@ -25,6 +25,9 @@ body {
 	color: #3d444f;
 }
 
+.specials{
+	margin-top: -15px;
+}
 #specials{
 	padding-left: 5px;
 	padding-right: 10px;	

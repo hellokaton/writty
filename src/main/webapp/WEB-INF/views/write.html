@@ -80,9 +80,13 @@ var testEditor = editormd("editormd", {
     width   		: "100%",
     height  		: 640,
     syncScrolling 	: "single",
-    theme			: "dark",
+    toolbarIcons : function() {
+        return ["bold", "del", "italic", "quote", "|", "h1", "h2", "h3", "h4", "h5","h6", "|",
+                	"list-ul", "list-ol", "hr", "|", "link", "image", "code", "||", "watch", "fullscreen", "preview", "testIcon"]
+    },
+    /* theme			: "dark",
     previewTheme 	: "dark",
-    editorTheme  	: "pastel-on-dark",
+    editorTheme  	: "pastel-on-dark", */
     path    		: "${base}/assets/editor.md/lib/"
 });
 
@@ -155,8 +159,9 @@ function add_article(){
 	$.post(BASE + '/write', formData, function(response) {
 		if (response) {
 			if (response.status == 200) {
-				alertOk("文章发布成功，请等待审核！");
-				window.location.href = BASE + '/articles';
+				alertOk("文章发布成功，请等待审核！", function(){
+					window.location.href = BASE + '/articles';
+				});
 			} else if (response.status == 401) {
 				go_signin();
 			} else {

@@ -65,13 +65,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User saveGithubUser(final String user_name, String name, final String avatar_url, Long open_id) {
+	public User saveGithubUser(final String user_name, String name, String email, final String avatar_url, Long open_id) {
 		if(StringKit.isNotBlank(user_name) && null != open_id){
 			try {
 				Integer time = DateKit.getCurrentUnixTime();
 				final Long uid = (Long) AR
-						.update("insert into t_user(user_name, nick_name, avatar, created, updated) values(?, ?, ?, ?, ?)",
-								user_name, name, avatar_url, time, time)
+						.update("insert into t_user(user_name, nick_name, email, avatar, created, updated) values(?, ?, ?, ?, ?, ?)",
+								user_name, name, email, avatar_url, time, time)
 						.key();
 				openService.save(open_id, uid);
 				

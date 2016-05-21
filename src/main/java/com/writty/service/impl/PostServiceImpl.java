@@ -44,7 +44,8 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public Page<Map<String, Object>> getPageListMap(Long uid, Long sid, Integer is_pub, String title, Integer page, Integer count) {
+	public Page<Map<String, Object>> getPageListMap(Long uid, Long sid, Integer is_pub, String title,
+			Integer page, Integer count, String orderby) {
 		
 		if(null == page || page < 1){
 			page = 1;
@@ -67,7 +68,10 @@ public class PostServiceImpl implements PostService {
 			up.like("title", "%"+title+"%");
 		}
 		up.eq("is_del", 0);
-		up.orderby("created desc").page(page, count);
+		if(StringKit.isBlank(orderby)){
+			orderby = "created desc";
+		}
+		up.orderby(orderby).page(page, count);
 		Page<Post> postPage = AR.find(up).page(Post.class);
 		return this.getPageListMap(postPage);
 	}
@@ -196,6 +200,51 @@ public class PostServiceImpl implements PostService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Map<String, Object>> getListMap(Long uid, Long sid, Integer is_pub, String title, String orderby) {
+		QueryParam up = QueryParam.me();
+		if(null != uid){
+			up.eq("uid", uid);
+		}
+		if(null != sid){
+			up.eq("sid", sid);
+		}
+		if(null != is_pub){
+			up.eq("is_pub", is_pub);
+		}
+		if(StringKit.isNotBlank(title)){
+			up.like("title", "%"+title+"%");
+		}
+		up.eq("is_del", 0);
+		if(StringKit.isBlank(orderby)){
+			orderby = "created desc";
+		}
+		up.orderby(orderby);
+		List<Post> posts = AR.find(up).list(Post.class);
+		return this.getListMap(posts);
+	}
+
+	@Override
+	public List<Post> getList(Long uid, Integer is_pub, String title, String orderby) {
+		QueryParam up = QueryParam.me();
+		if(null != uid){
+			up.eq("uid", uid);
+		}
+		if(null != is_pub){
+			up.eq("is_pub", is_pub);
+		}
+		if(StringKit.isNotBlank(title)){
+			up.like("title", "%"+title+"%");
+		}
+		up.eq("is_del", 0);
+		if(StringKit.isBlank(orderby)){
+			orderby = "created desc";
+		}
+		up.orderby(orderby);
+		List<Post> posts = AR.find(up).list(Post.class);
+		return posts;
 	}
 	
 }

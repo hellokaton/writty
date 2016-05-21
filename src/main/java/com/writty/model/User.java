@@ -24,6 +24,8 @@ public class User implements Serializable {
 	//昵称
 	private String nick_name;
 	
+	private String email;
+	
 	//用户头像
 	private String avatar;
 	
@@ -111,6 +113,14 @@ public class User implements Serializable {
 
 	public void setLogined(Integer logined) {
 		this.logined = logined;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

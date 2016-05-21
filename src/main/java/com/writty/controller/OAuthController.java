@@ -82,7 +82,7 @@ public class OAuthController extends BaseController {
 		 	Long open_id = githubUser.getLong("id");
 		 	String login = githubUser.getString("login");
 		 	String name = githubUser.getString("name");
-//		 	String email = githubUser.getString("email");
+		 	String email = githubUser.getString("email");
 		 	String avatar_url = githubUser.getString("avatar_url");
 		 	
 		 	User user = null;
@@ -93,7 +93,7 @@ public class OAuthController extends BaseController {
 		 		Map<String, String> githubInfo = new HashMap<String, String>(3);
 		 		githubInfo.put("login_name", login);
 		 		githubInfo.put("open_id", open_id.toString());
-		 		user = userService.saveGithubUser(login, name, avatar_url, open_id);
+		 		user = userService.saveGithubUser(login, name, email, avatar_url, open_id);
 		 	} else {
 		 		user = userService.getUser(open.getUid());
 			}

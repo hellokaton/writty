@@ -2,6 +2,7 @@ package com.writty.controller;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.blade.Blade;
@@ -17,6 +18,7 @@ import com.blade.web.multipart.FileItem;
 import com.writty.Constant;
 import com.writty.kit.SessionKit;
 import com.writty.kit.Utils;
+import com.writty.model.Post;
 import com.writty.model.User;
 import com.writty.service.FavoriteService;
 import com.writty.service.PostService;
@@ -44,7 +46,7 @@ public class UserController extends BaseController {
 	/**
 	 * 我的文章列表
 	 */
-	@Route(value = "/articles", method = HttpMethod.GET)
+	@Route(value = "/my", method = HttpMethod.GET)
 	public ModelAndView my_articles(Request request, Response response){
 		User user = SessionKit.getLoginUser();
 		if(null == user){
@@ -53,9 +55,20 @@ public class UserController extends BaseController {
 		}
 		
 		Integer page = request.queryAsInt("p");
-		Page<Map<String, Object>> postPage = postService.getPageListMap(user.getUid(), null, null, null, page, 20);
-		request.attribute("postPage", postPage);
-		return this.getView("articles");
+		
+		// 未审核列表
+		List<Post> auditList = postService.getList(user.getUid(), 0, null, null);
+		request.attribute("auditList", auditList);
+		
+		// 我发布的
+		Page<Map<String, Object>> publishPage = postService.getPageListMap(user.getUid(), null, null, null, page, 10, "is_pub asc, created desc");
+		request.attribute("publishPage", publishPage);
+		
+		// 我收藏的
+		Page<Map<String, Object>> favoritePage = favoriteService.getMyFavorites(user.getUid(), page, 10);
+		request.attribute("favoritePage", favoritePage);
+				
+		return this.getView("my");
 	}
 	
 	/**
@@ -168,20 +181,30 @@ public class UserController extends BaseController {
 	/**
 	 * 修改密码
 	 */
-	@Route(value = "/reset_pwd", method = HttpMethod.GET)
+	@Route(value = "/reset_pwd", method = HttpMethod.POST)
 	public void reset_pwd(Request request, Response response){
 		User user = SessionKit.getLoginUser();
 		if(null == user){
 			response.go("/");
 			return;
 		}
-		String pwd = request.query("pwd");
+		String curpwd = request.query("curpwd");
+		if(StringKit.isNotBlank(curpwd)){
+			if(!user.getPass_word().equals(EncrypKit.md5(user.getUser_name() + curpwd))){
+				this.error(response, "当前密码不正确");
+				return;
+			}
+		}
+		
+		String pwd = request.query("newpwd");
 		if(StringKit.isBlank(pwd) || pwd.length() < 6 || pwd.length() > 20){
-			this.error(response, "请输入6 - 20位密码");
+			this.error(response, "请输入6至20位密码");
 			return;
 		}
+		
 		String newpwd = EncrypKit.md5(user.getUser_name() + pwd);
 		userService.updatePwd(user.getUid(), newpwd);
+		this.success(response, "");
 	}
 	
 	/**

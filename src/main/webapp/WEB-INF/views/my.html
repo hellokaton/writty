@@ -1,0 +1,67 @@
+#include("./common/header.html", {title:"个人中心"})
+<div class="container wraper container-fluid">
+	<div class="row">
+        <div class="col-md-8">
+        	#if(null != auditList && auditList.size() > 0)
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">待审核文章列表</h3>
+                </div>
+                <div class="panel-body">
+					<ul class="list-group">
+						#for(item : auditList)
+						<li class="list-group-item">
+							#if(item.type == 1)<span class="label label-primary">原创</span>#end
+                            #if(item.type == 2)<span class="label label-default">转载</span>#end
+                            #if(item.type == 3)<span class="label label-danger">翻译</span>#end
+							${item.title}</li>
+						#end
+					</ul>
+				</div>
+            </div>
+        	#end
+        	#if(null != publishPage && null != publishPage.results)
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">我发布的文章列表</h3>
+                </div>
+                <div class="panel-body">
+					<ul class="list-group">
+						#for(item : publishPage.results)
+						<li class="list-group-item"><span class="badge bg-inverse">${item.comments}</span>
+							#if(item.type == 1)<span class="label label-primary">原创</span>#end
+                            #if(item.type == 2)<span class="label label-default">转载</span>#end
+                            #if(item.type == 3)<span class="label label-danger">翻译</span>#end
+							<a href="${base_url('/p/') + item.pid}">${item.title}</a></li>
+						#end
+					</ul>
+				</div>
+            </div>
+        	#end
+        	#if(null != favoritePage && null != favoritePage.results && favoritePage.results.size() > 0)
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">我收藏的文章列表</h3>
+                </div>
+                <div class="panel-body">
+					<ul class="list-group">
+						#for(item : favoritePage.results)
+						<li class="list-group-item"><span class="badge bg-inverse">${item.comments}</span>
+							#if(item.type == 1)<span class="label label-primary">原创</span>#end
+                            #if(item.type == 2)<span class="label label-default">转载</span>#end
+                            #if(item.type == 3)<span class="label label-danger">翻译</span>#end
+							<a href="${base_url('/p/') + item.pid}">${item.title}</a></li>
+						#end
+					</ul>
+				</div>
+            </div>
+        	#end
+        </div><!-- /.col-md-8 -->
+        <div class="col-md-4">
+		        	
+        </div>
+	</div><!-- /.row -->
+</div><!-- /.container -->
+#include("./common/footer.html") 
+</body>
+</html>
