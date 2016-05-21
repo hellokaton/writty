@@ -12,9 +12,11 @@
 		      <div class='post-content'>
 		        <div class='category'><a href="${base_url('/s/') + item.sid}" style="color: white;">${item.special}</a></div>
 		        <a href="${base_url('/p/') + item.pid}"><h1 class='title'>${item.title}</h1></a>
+		        #--
 		        <p class='description'>
 		        	${str_count(item.content, 30)}
 		        </p>
+		        --#
 		        <div class='post-meta'>
 		          	<span class='timestamp'>
 			            <i class='fa fa-clock-o'></i>
@@ -28,7 +30,26 @@
 		      </div>
 		    </div>
 	  	</div>
-	  	#end
+		#end
+	</div>
+	<div class="row" style="margin-right: 15px;">
+		#if(postPage.totalPage > 1)
+		<ul class="pagination pull-right m-b-5">
+			<li #if(postPage.page== 1) class="disabled" #end>
+				<a href="${base_url('/explore?p=') + postPage.prev_page}" aria-label="Previous"> <i class="fa fa-angle-left"></i>
+				</a>
+			</li>
+			#for (int i : range(1, postPage.totalPage))
+			<li #if(postPage.page==i) class="active" #end>
+				<a href="${base_url('/explore?p=') + i}">${i}</a>
+			</li> 
+			#end
+			<li #if(postPage.totalPage== postPage.page) class="disabled" #end>
+				<a href="${base_url('/explore?p=') + postPage.next_page}" aria-label="Next"> <i class="fa fa-angle-right"></i>
+				</a>
+			</li>
+		</ul>
+		#end
 	</div>
 </div>
 <!-- END Wraper -->

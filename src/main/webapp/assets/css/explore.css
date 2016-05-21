@@ -9,7 +9,7 @@ body {
   display: block;
   background: #ffffff;
   min-width: 270px;
-  height: 470px;
+  /* height: 470px; */
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
@@ -34,7 +34,7 @@ body {
 }
 .post-module .thumbnail {
   background: #000000;
-  height: 400px;
+  height: 320px;
   overflow: hidden;
 }
 
@@ -154,6 +154,21 @@ body {
 .entry-content{
 	font-size: 18px;
 	color: #404040;
+}
+
+.entry-content pre,code, .hljs{
+	background-color: #F8F8F8;
+}
+
+.entry-content pre{
+	font-size: 14px;
+	border-color: #DADADA;
+	padding: 0 9.5px;
+	margin-top: 10px;
+}
+
+.entry-content code{
+	margin-top: -15px;
 }
 
 .entry-content p{
