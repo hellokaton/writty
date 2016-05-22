@@ -5,7 +5,7 @@
 <link href="${cdn}/assets/select2/select2.css" rel="stylesheet" />
 <link href="${cdn}/assets/css/explore.css" rel="stylesheet" />
 <!-- Page Content Start -->
-<div class="container wraper container-fluid" style="max-width: 960px;">
+<div class="container wraper container-fluid">
 	<form id="add_article_form" role="form" method="post" onsubmit="return add_article();">	
 		<div class="row">
 			<div class="text-center">
@@ -125,20 +125,22 @@ function add_article(){
 		return false;
 	}
 	
-	if($('#add_article_form #title').val().length < 5 || $('#add_article_form #title').val().length > 20){
-		alertError("请输入5-20个字符以内的标题");
+	if($('#add_article_form #title').val().length < 5 || $('#add_article_form #title').val().length > 50){
+		alertError("请输入5-50个字符以内的标题");
 		return false;
 	}
 	
-	if(simplemde.value() == ''){
+	if(editor.codemirror.getValue() == ''){
 		alertError("请输入文章内容");
 		return false;
 	}
 	
-	if(simplemde.value().length < 100){
-		alertError("请输入100个字符以上的文章");
+	if(editor.codemirror.getValue().length < 50){
+		alertError("请输入50个字符以上的文章");
 		return false;
 	}
+	
+	$('#add_article_form #editor').val(editor.codemirror.getValue());
 	
 	if($('#add_article_form #sid').val() == ''){
 		alertError("请选择文章所属专栏");
@@ -150,7 +152,7 @@ function add_article(){
 		if (response) {
 			if (response.status == 200) {
 				alertOk("文章发布成功，请等待审核！", function(){
-					window.location.href = BASE + '/articles';
+					window.location.href = BASE + '/my';
 				});
 			} else if (response.status == 401) {
 				go_signin();

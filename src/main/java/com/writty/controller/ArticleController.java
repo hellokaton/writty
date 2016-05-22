@@ -87,13 +87,13 @@ public class ArticleController extends BaseController {
 			return;
 		}
 		
-		if(title.length() < 5 || title.length() > 20){
+		if(title.length() < 5 || title.length() > 50){
 			this.error(response, "请输入5-20个字符长度的标题");
 			return;
 		}
 		
-		if(content.length() < 100){
-			this.error(response, "请输入100字以上的文章内容");
+		if(content.length() < 50){
+			this.error(response, "请输入50字以上的文章内容");
 			return;
 		}
 		
